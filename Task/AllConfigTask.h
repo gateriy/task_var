@@ -10,9 +10,17 @@
 #include"Task_2.h"
 #include"Task_3.h"
 
+
+template <typename text, typename data> void Output(const text& A, const  data& B);
+
+template <typename text, typename data> data InputVar(const text& A, const  data& B);
+
+
 class AllConfigTask {
+
 public:
 	void InteractiveVarTask(const std::string& v_text);
+
 private:
 	std::string number_task{ };
 	bool exit = true;
