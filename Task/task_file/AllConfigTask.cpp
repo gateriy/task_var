@@ -109,3 +109,5 @@ void AllConfigTask::ConsolLang1251() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 }
+
+

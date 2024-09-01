@@ -1,10 +1,9 @@
-﻿// Task_makros.cpp 
-
+﻿// Task_exceptions.cpp
 #include <iostream>
 #include <string>
 #include <Windows.h>
 
-#include"AllConfigTask.h"
+#include "task_file/AllConfigTask.h"
 
 int main() {
 
