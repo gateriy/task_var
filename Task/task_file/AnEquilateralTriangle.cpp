@@ -1,7 +1,7 @@
 #include "AnEquilateralTriangle.h"
 #include "My_exception.h"
 
-//равносторонний треугольник(все стороны равны, все углы равны 60);
+//СЂР°РІРЅРѕСЃС‚РѕСЂРѕРЅРЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє(РІСЃРµ СЃС‚РѕСЂРѕРЅС‹ СЂР°РІРЅС‹, РІСЃРµ СѓРіР»С‹ СЂР°РІРЅС‹ 60);
 AnEquilateralTriangle::AnEquilateralTriangle(double a) :
 	Triangle(a, b, c, A, B, C)
 {
@@ -10,10 +10,10 @@ AnEquilateralTriangle::AnEquilateralTriangle(double a) :
 	C = 60;
 	A = 60;
 	B = 60;
-	text_var = "Равносторонний треугольник: ";
+	text_var = "Р Р°РІРЅРѕСЃС‚РѕСЂРѕРЅРЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє: ";
 	count = 4;
 }
-//функция вывода в консоль используется по условиям для 3 задания
+//С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РІ РєРѕРЅСЃРѕР»СЊ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїРѕ СѓСЃР»РѕРІРёСЏРј РґР»СЏ 3 Р·Р°РґР°РЅРёСЏ
 void AnEquilateralTriangle::AnEquilateralTriangle::print_info() {
 try{
 	get_var_task_3(count);
@@ -23,17 +23,17 @@ catch (const My_Exeception& exp) {
 	std::cout << exp.what() << std::endl;
 }
 catch (...) {
-	std::cout << "Не известная ошибка" << std::endl;
+	std::cout << "РќРµ РёР·РІРµСЃС‚РЅР°СЏ РѕС€РёР±РєР°" << std::endl;
 }
 };
-//функция проверки правильности используется по условиям для 3 задания
+//С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё РїСЂР°РІРёР»СЊРЅРѕСЃС‚Рё РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїРѕ СѓСЃР»РѕРІРёСЏРј РґР»СЏ 3 Р·Р°РґР°РЅРёСЏ
 bool AnEquilateralTriangle::check() {
 
 	if (!((A == 60) && (B == 60) && (C == 60))) {
-		throw My_Exeception(shablon_text+"углы не равны 60 град.");
+		throw My_Exeception(shablon_text+"СѓРіР»С‹ РЅРµ СЂР°РІРЅС‹ 60 РіСЂР°Рґ.");
 	}
 	if (!((a == b) && (a == c) && (b == c))) {
-		throw My_Exeception(shablon_text+"длины сторон не равны.");
+		throw My_Exeception(shablon_text+"РґР»РёРЅС‹ СЃС‚РѕСЂРѕРЅ РЅРµ СЂР°РІРЅС‹.");
 	}
 
 	return ((A == 60) && (B == 60) && (C == 60) && (a == b) && (a == c) && (b == c));
