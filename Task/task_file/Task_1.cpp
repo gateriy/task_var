@@ -1,96 +1,95 @@
 #include "Task_1.h"
 
 
+
 /*
-Задача 1. Простое исключение
-В этом задании вы попробуете выбросить и обработать исключение.
-Создайте функцию int function(std::string str, int forbidden_length). 
-Эта функция должна возвращать длину переданной строки, если эта длина 
-не равна значению переданного параметра forbidden_length. 
-В противном случае она должна выбрасывать исключение bad_length.
 
-Для проверки функции организуйте работу с пользователем. 
-В начале задайте запретную длину, а затем считывайте пользовательские 
-строки и выводите их длину до тех пор, пока пользователь не введёт строку запретной длины. 
-После этого сообщите ему, что он ввёл строку запретной длины, и завершите программу.
+Задача 1. Сравнения в дробях
+В этом задании вы переопределите операторы сравнения для дробей.
 
-Пример работы программы Консоль
+Дан код на C++:
 
-Введите запретную длину: 5
-Введите слово: Привет
-Длина слова "Привет" равна 6
-Введите слово: мир
-Длина слова "мир" равна 3
-Введите слово: пирог
-Вы ввели слово запретной длины! До свидания
+#include <iostream>
 
----Что использовать для решения.---
-Для вычисления длины строки используйте метод класса std::string — length.
-Для создания исключения используйте ключевое слово throw.
-Для ожидания исключения используйте ключевое слово try.
-Для обработки исключения используйте ключевое слово catch.
+class Fraction
+{
+private:
+	int numerator_;
+	int denominator_;
+
+public:
+	Fraction(int numerator, int denominator)
+	{
+		numerator_ = numerator;
+		denominator_ = denominator;
+	}
+};
+
+int main()
+{
+	Fraction f1(4, 3);
+	Fraction f2(6, 11);
+
+	std::cout << "f1" << ((f1 == f2) ? " == " : " not == ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 != f2) ? " != " : " not != ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 < f2) ? " < " : " not < ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 > f2) ? " > " : " not > ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 <= f2) ? " <= " : " not <= ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 >= f2) ? " >= " : " not >= ") << "f2" << '\n';
+	return 0;
+}
+Ваша задача — дописать класс Fraction так, чтобы программа компилировалась и работала корректно.
+
+Пример работы программы
+
+Консоль
+
+f1 not == f2
+f1 != f2
+f1 not < f2
+f1 > f2
+f1 not <= f2
+f1 >= f2
+
 */
 
-
-
-int function(const std::string& str, const int& forbidden_length) {
-		
-	if (forbidden_length != (str.length())) {
-		return static_cast<int>(str.length());
-	}
-	else {
-		throw My_Exeception("Вы ввели слово запретной длины! До свидания");
-	};
+bool Fraction::operator == (Fraction& new_var) {
+	return (numerator_ == new_var.numerator_ && denominator_ == new_var.denominator_);
+}
+bool Fraction::operator != (Fraction& new_var) {
+	return !(*this == new_var);
+}
+bool Fraction::operator > (Fraction& new_var) {//перегрузка наоборот по условиям задачи !!!!!!
+	return numerator_ < new_var.numerator_ && denominator_ < new_var.denominator_;
+}
+bool Fraction::operator < (Fraction& new_var) {
+	return (new_var > *this);
+}
+bool Fraction::operator >= (Fraction& new_var) {
+	return !(*this < new_var);
+}
+bool Fraction::operator <= (Fraction& new_var) {
+	return !(*this > new_var);
 }
 
-int StringToInt(const std::string& text_var) {
-	
-	std::string simbol{ "0123456789 "};
-	std::string var_t{""};
-	bool err{ false };
+//Верно, что * - оператор разыменования, неверно, что this - ссылка.
+//this - указатель на текущий объект.Таким образом,
+//* this - ссылка на текущий объект.
 
-	for (const char& i : text_var) {
-		err = false;		 
-		for (const char& simvol_x : simbol) {
-
-			if (i == simvol_x) { 
-				var_t = var_t + i;
-				err = true;
-			}
-		}
-			if (err == false) {
-				throw My_Exeception("Вы ввели не целочисленный символ! До свидания");
-			}
-	}
-	return std::stoi(var_t);
-}
 
 void Task_1() {
-		std::string size_text{};
-		std::string text{};	
-		int s_text{ 0 }, x_var{ 0 };
-	try
-	{			
-		std::cout << "Введите запретную длину: ";
-		std::cin >> size_text;
-		s_text = StringToInt(size_text);
-		std::cout << std::endl;
+	
+	Fraction f1(4, 3);
+	Fraction f2(6, 11);
+	
 
+	std::cout << "f1" << ((f1 == f2) ? " == " : " not == ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 != f2) ? " != " : " not != ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 < f2) ? " < " : " not < ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 > f2) ? " > " : " not > ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 <= f2) ? " <= " : " not <= ") << "f2" << '\n';
+	std::cout << "f1" << ((f1 >= f2) ? " >= " : " not >= ") << "f2" << '\n';
 
-		do {
-			std::cout << "Введите слово: ";
-			std::cin >> text;
-			x_var = function(text, s_text);
-			std::cout << "Длина слова " << text << " равна " << x_var << std::endl;
-		} while (true);
-		
-	}
-	catch (const My_Exeception& exp) {	
-		std::cout << std::endl;
-		std::cout << exp.what() << std::endl; }
-
-	catch (...) { 
-		std::cout << std::endl;
-		std::cout << "Не известная ошибка" << std::endl; }
-
+	//f2.VVV();
+	//f1.VVV();
 };

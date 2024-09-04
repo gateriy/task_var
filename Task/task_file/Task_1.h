@@ -4,22 +4,33 @@
 
 #include <iostream>
 #include <string>
-#include"My_exception.h"
 
-/*class My_Exeception : public std::exception {
-public:
-	My_Exeception(const std::string& mess) : mess(mess) {};
 
-	const char* what() const noexcept override;
-
+class Fraction
+{
 private:
-	std::string mess{};
+	int numerator_;
+	int denominator_;
+
+public:
+	Fraction(int numerator, int denominator)
+	{
+		numerator_ = numerator;
+		denominator_ = denominator;
+	}
+
+
+	bool operator == (Fraction& new_var);
+	bool operator != (Fraction& new_var);
+	bool operator > (Fraction& new_var);
+	bool operator < (Fraction& new_var);
+	bool operator >= (Fraction& new_var);
+	bool operator <= (Fraction& new_var);
+
+	//void VVV() {
+	//	std::cout << (this->numerator_)<<this->denominator_<< std::endl;
+	//}
 };
-*/
-
-int function(const std::string& str, const int& forbidden_length);
-
-int StringToInt(const std::string& text_var);
 
 void Task_1();
 

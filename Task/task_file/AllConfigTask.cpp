@@ -1,21 +1,5 @@
 #include "AllConfigTask.h"
 
-
-template <typename text, typename data> data InputVar(const text& A, const  data& B) {
-	//идентификатор типа переменной
-	auto var = B;
-	std::cout << text;
-	std::cin >> var;
-	std::cout << std::endl;
-	return var;
-}
-
-template <typename text, typename data> void Output(const text& A, const  data& B) {
-	//std::cout << std::endl;
-	std::cout << A << B << std::endl;
-	//std::cout << std::endl;
-};
-
 void AllConfigTask::InteractiveVarTask(const std::string& v_text) {
 
 	ConsolLang1251();
@@ -109,5 +93,3 @@ void AllConfigTask::ConsolLang1251() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 }
-
-
