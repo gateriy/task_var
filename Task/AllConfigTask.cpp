@@ -1,5 +1,6 @@
 #include "AllConfigTask.h"
 
+
 void AllConfigTask::InteractiveVarTask(const std::string& v_text) {
 
 	ConsolLang1251();

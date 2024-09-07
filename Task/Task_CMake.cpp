@@ -1,9 +1,9 @@
-п»ї// Task_overload.cpp
+п»ї// Shablon.cpp : 
 #include <iostream>
 #include <string>
 #include <Windows.h>
 
-#include "AllConfigTask.h"
+#include"AllConfigTask.h"
 
 int main() {
 

@@ -11,10 +11,20 @@
 #include "Task_3.h"
 
 
-template < typename data> void Output(const std::string& A, const  data& B);
+template <typename text, typename data> data InputVar(const text& A, const  data& B) {
+	//идентификатор типа переменной
+	data var = B;
+	std::cout << A;
+	std::cin >> var;
+	//std::cout << std::endl;
+	return var;
+}
 
-template < typename data> void Output_2
-(const std::string& A_1, const  data& B_1, const std::string& A_2, const  data& B_2);
+template <typename text, typename data> void Output(const text& A, const  data& B) {
+	//std::cout << std::endl;
+	std::cout << A << B << std::endl;
+};
+
 
 class AllConfigTask {
 
