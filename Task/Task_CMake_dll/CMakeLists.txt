@@ -12,12 +12,12 @@ endif()
 project ("Task_CMake_dll")
 
 # Р”РѕР±Р°РІСЊС‚Рµ РёСЃС‚РѕС‡РЅРёРє РІ РёСЃРїРѕР»РЅСЏРµРјС‹Р№ С„Р°Р№Р» СЌС‚РѕРіРѕ РїСЂРѕРµРєС‚Р°.
-add_executable (Task_CMake_dll "Task_CMake_dll.cpp"   "AllConfigTask.cpp" "AllConfigTask.h" "Task_1.cpp" "Task_1.h" "Task_2.cpp" "Task_2.h" "Task_3.cpp" "Task_3.h" "Task_dll.h" "Task_dll.cpp" "Task_static.h" "Task_static.cpp")
+add_executable (Task_CMake_dll "Task_CMake_dll.cpp"   "AllConfigTask.cpp" "AllConfigTask.h" "Task_1.cpp" "Task_1.h" "Task_2.cpp" "Task_2.h" "Task_3.cpp" "Task_3.h")
 
 add_library(Task_static STATIC "Task_static.cpp" "Task_static.h")
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(Task_dll SHARED "Task_dll.cpp" "Task_dll.h")
-target_link_libraries(Task_CMake_dll Task_dll)
+target_link_libraries(Task_CMake_dll Task_dll Task_static)
 
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
