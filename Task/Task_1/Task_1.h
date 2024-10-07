@@ -4,11 +4,9 @@
 
 #include <iostream>
 #include <string>
-
-
+#include <Windows.h>
 
 void Task_1();
-int inRowPosition();
-void inResultRecurs(int& position_x, unsigned int & res_1, unsigned int  res_2);
+int quick_sort(int* arr, int size);
 
 #endif 
