@@ -1,5 +1,4 @@
-п»ї// Task_1.cpp 
-
+п»ї// Task_1_3_(arr_din_logic)
 #include <iostream>
 #include <string>
 #include <Windows.h>
@@ -9,6 +8,6 @@
 int main() {
 
 	AllConfigTask config_task;
-	config_task.InteractiveVarTask("Input numder task (1) or \"0\" exit: ");
+	config_task.InteractiveVarTask("Input numder task Dinamick Array (1, 2, 3) or \"0\" exit: ");
 
 }
