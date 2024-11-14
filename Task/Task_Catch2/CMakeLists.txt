@@ -12,7 +12,7 @@ endif()
 project ("Task_Catch2")
 
 # Р”РѕР±Р°РІСЊС‚Рµ РёСЃС‚РѕС‡РЅРёРє РІ РёСЃРїРѕР»РЅСЏРµРјС‹Р№ С„Р°Р№Р» СЌС‚РѕРіРѕ РїСЂРѕРµРєС‚Р°.
-add_executable (Task_Catch2 "Task_Catch2.cpp" "Task_Catch2.h" "catch_amalgamated.hpp" "catch_amalgamated.cpp")
+add_executable (Task_Catch2 "Task_Catch2.cpp" "Task_Catch2.h" "catch_amalgamated.hpp" "catch_amalgamated.cpp" "my_list.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Task_Catch2 PROPERTY CXX_STANDARD 20)
