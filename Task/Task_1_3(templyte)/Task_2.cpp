@@ -29,19 +29,38 @@ void Task_2() {
 
 	{
 		auto test = Two_Array<double>(2, 3);
-		test._table[0][0] = 4.333333;
-		std::cout << test._table[0][0] << std::endl;
-
+		std::cout << "Размер таблицы (тип double):" << std::endl;
+		std::cout << "Количество строк:\t" << test.size().first << std::endl;
+		std::cout << "Количество столбцов:\t" << test.size().second << std::endl;
+		test[0][0] = 4.555;		
+		std::cout << "Заданное в коде значение ячейки массива test[0][0] = 4.555 !"<< std::endl;
+		std::cout << "Прочтенное значение массива по адресу [0][0]: " << test[0][0] << std::endl;
+		std::cout << "-------------------------------------" << std::endl;
+		std::cout  << std::endl;
 	}
+
 	{
 		auto test = Two_Array<int>(2, 3);
-		test._table[0][0] = 4;
-		std::cout << test._table[0][0] << std::endl;
+		std::cout << "Размер таблицы (тип int):" << std::endl;
+		std::cout << "Количество строк:\t" << test.size().first << std::endl;
+		std::cout << "Количество столбцов:\t" << test.size().second << std::endl;
+		test[1][2] = 4;
+		std::cout << "Заданное в коде значение ячейки массива test[1][2] = 4 !" << std::endl;
+		std::cout << "Прочтенное значение массива по адресу [2][3]: " << test[1][2] << std::endl;
+		std::cout << "-------------------------------------" << std::endl;
+		std::cout << std::endl;
 	}
+
 	{
 		auto test = Two_Array<long long int>(2, 3);
-		test._table[1][1] = 4000000000000000000;
-		std::cout << test._table[1][1] << std::endl;
+		std::cout << "Размер таблицы (тип long long int):" << std::endl;
+		std::cout << "Количество строк:\t" << test.size().first << std::endl;
+		std::cout << "Количество столбцов:\t" << test.size().second << std::endl;
+		test[1][1] = 4000000000000000000;
+		std::cout << "Заданное в коде значение ячейки массива test[1][1] = 4000000000000000000 !" << std::endl;
+		std::cout << "Прочтенное значение массива по адресу [2][2]: " << test[1][1] << std::endl;
+		std::cout << "-------------------------------------" << std::endl;
+		std::cout << std::endl;
 	}
 
 };
