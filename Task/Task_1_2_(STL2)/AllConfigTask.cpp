@@ -1,5 +1,28 @@
 #include "AllConfigTask.h"
 
+template <typename T, typename F>
+void print_container(const T& var_x, const F& text) {
+	bool first{ false };
+
+	std::cout << std::endl;
+	first = true;
+	std::cout << text;
+	for (const auto& y : var_x) {
+		if (first == true) {
+
+
+			std::cout << y;
+			first = false;
+		}
+		else {
+			std::cout << ", " << y;
+		}
+	}
+	std::cout << std::endl;
+	std::cout << "---------------------------" << std::endl;
+	std::cout << std::endl;
+};
+
 
 template <typename text, typename data> data InputVar(const text& A, const  data& B) {
 	//идентификатор типа переменной

@@ -2,8 +2,7 @@
 #ifndef TASK_3_H
 #define TASK_3_H
 
-#include <iostream>
-#include <string>
+#include "AllConfigTask.h"
 
 void Task_3();
 
