@@ -4,9 +4,6 @@
 
 #include "AllConfigTask.h"
 
-template <typename T, typename F>
-void print_container(const T& var_x, const F& text);
-
 void Task_2();
 
 #endif

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a030de86-8d33-411e-a134-b92fc5d892cd}</ProjectGuid>
-    <RootNamespace>Task13templyte</RootNamespace>
+    <ProjectGuid>{fe114797-90db-490e-bae3-2e4dc94c5210}</ProjectGuid>
+    <RootNamespace>Taskunique</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -130,9 +130,9 @@
   <ItemGroup>
     <ClCompile Include="AllConfigTask.cpp" />
     <ClCompile Include="Task_1.cpp" />
-    <ClCompile Include="Task_1_3(templyte).cpp" />
     <ClCompile Include="Task_2.cpp" />
     <ClCompile Include="Task_3.cpp" />
+    <ClCompile Include="Task_unique.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllConfigTask.h" />
