@@ -4,13 +4,14 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <memory>
 #include <Windows.h>
+#include <vector>
+#include <algorithm>
+
+
 
 #include"Task_1.h"
 #include"Task_2.h"
-#include"Task_3.h"
 
 class AllConfigTask {
 

@@ -17,7 +17,6 @@ enum class AllConfigTask::Task {
 	exit_0,
 	task_1,
 	task_2,
-	task_3
 };
 
 void AllConfigTask::VarTaskNumber() {
@@ -30,7 +29,7 @@ void AllConfigTask::VarTaskNumber() {
 		std::cin >> number_task;
 		std::cout << std::endl;
 
-		if (number_task == "1" || number_task == "2" || number_task == "3" || number_task == "0") {
+		if (number_task == "1" || number_task == "2" || number_task == "0") {
 
 			std::cout << "\033c";//очистка консоли
 
@@ -46,10 +45,6 @@ void AllConfigTask::VarTaskNumber() {
 				break;
 			case(static_cast<int>(Task::task_2)):
 				Task_2();
-				exit = false;
-				break;
-			case(static_cast<int>(Task::task_3)):
-				Task_3();
 				exit = false;
 				break;
 			case(static_cast<int>(Task::exit_0)):
@@ -71,7 +66,6 @@ bool AllConfigTask::ExitProgram()
 	char exit_Y_N{};
 	do
 	{
-		//std::cout << std::endl;
 		std::cout << "Exit programm (Y/N): ";
 		std::cin >> exit_Y_N;
 		std::cout << std::endl;
