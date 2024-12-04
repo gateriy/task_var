@@ -44,7 +44,7 @@ std::vector<int> big_intger :: _summ_x(const std::vector<int>& a) {
 	std::vector<int> res_i{};
 	int end_x{ 0 }, first_x{ 0 };
 
-	for (int i = (a.size() - 1); i >= 0; --i) {
+	for (int i = static_cast<int>((a.size() - 1)); i >= 0; --i) {
 
 		end_x = (a.at(i) + first_x) % 10;	
 		first_x = (a.at(i) + first_x) / 10; 	
@@ -73,9 +73,9 @@ std::string big_intger :: summ_y(const std::string& xx, const std::string& yy) {
 		y = _transfor_vector(xx);
 		x = _transfor_vector(yy);
 	}
-	count = (y.size() - 1);
+	count = static_cast<int>((y.size() - 1));
 
-	for (int i = (x.size() - 1); i >= 0; --i) {
+	for (int i = static_cast<int>((x.size() - 1)); i >= 0; --i) {
 
 		r1 = x.at(i);
 		if (count >= 0) {
@@ -114,7 +114,7 @@ std::string big_intger::multi(const std::string& str_a, const std::string& str_b
 		y = _transfor_vector(str_b);
 	}
 
-	for (int i = (x.size() - 1); i >= 0; --i) {
+	for (int i = static_cast<int>((x.size() - 1)); i >= 0; --i) {
 		vec_var.push_back(0);
 		for (int j = 0; j < y.size(); ++j) {
 			vec_var.push_back((y.at(j) * x.at(i)));
@@ -154,12 +154,16 @@ std::string big_intger::multi(const std::string& str_a, const std::string& str_b
 	return std::move(res);
 }
 
-std::string big_intger::get() {
+std::string big_intger::get() const {
 	return std::move(_text);
 }
 
 
-
+std::ostream& operator << (std::ostream& os, const big_intger& result)
+{
+	os << result._text;
+	return os;
+}
 
 
 void Task_2() {
@@ -181,23 +185,35 @@ void Task_2() {
 		{
 			auto x = big_intger(a);
 			auto y = big_intger(b);
-			
-				
+
+			std::string summ = x + y;
+			std::string multi = x * y;
+	
+			std::cout << "----------------------------------------" << std::endl;
+			std::cout << a << " + " << b << " = " << summ << std::endl;
+			std::cout << a << " * " << b << " = " << multi << std::endl;
+			std::cout << "----------------------------------------" << std::endl;
+		}
+
+		{
+			auto x = big_intger(a);
+			auto y = big_intger(b);
+
+			auto summ_1 = x + y;		
+			auto multi_1 = x * y;
 
 			std::cout << "----------------------------------------" << std::endl;
-			result = x + y;
-			std::cout << a << " + " << b << " = " << result.get() << std::endl;
-			result = x * y;
-			std::cout << a << " * " << b << " = " << result.get() << std::endl;
+			std::cout << a << " + " << b << " = " << summ_1 << std::endl;
+			std::cout << a << " * " << b << " = " << multi_1 << std::endl;
 			std::cout << "----------------------------------------" << std::endl;
 		}
 
 		std::cout << "Exit (y or n): ";
 		std::cin >> exit;
-		if (exit == "y") { 
-			std::cout << "----------------------------------------" << std::endl; 
-			break; }
+		if (exit == "y") {
+			std::cout << "----------------------------------------" << std::endl;
+			break;
+		}
 
 	} while (true);
-
 };
