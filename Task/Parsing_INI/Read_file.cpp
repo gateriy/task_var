@@ -1,7 +1,7 @@
 #include "Read_file.h"
 
-//С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° ini РїРѕ СЃС‚СЂРѕС‡РЅРѕ Рё С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РїРµСЂРІРёС‡РЅРѕРіРѕ РІРµРєС‚РѕСЂР° СЃС‚СЂРѕРє
-//С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° Рё С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РїРµСЂРІРёС‡РЅРѕРіРѕ РІРµРєС‚РѕСЂР° СЃС‚СЂРѕРє
+//чтение файла ini по строчно и формирование первичного вектора строк
+//чтение файла и формирование первичного вектора строк
 bool ReadFileInVector::_OupenFileWriteVector() {
 
 		_in_data_file.clear();
@@ -12,17 +12,17 @@ bool ReadFileInVector::_OupenFileWriteVector() {
 				
 				_x_line = 0;
 				
-				std::ifstream  f_in(_way); // РѕС‚РєСЂС‹Р»Рё С„Р°Р№Р» РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ РїСѓС‚Рё РЅР° С‡С‚РµРЅРёРµ
+				std::ifstream  f_in(_way); // открыли файл по заданному пути на чтение
 				
 				if (f_in.is_open()) {
 
 					do {				
 						getline(f_in >> std::ws, _x_text);
-						++_x_line; //РїСЂРѕС…РѕРґ РїРѕ С„Р°Р№Р»Сѓ РІ СЂРµР¶РёРјРµ СЃС‡РёС‚С‹РІР°РЅРёСЏ Рё РїРѕРґСЃС‡РµС‚ СЃС‚СЂРѕРє
+						++_x_line; //проход по файлу в режиме считывания и подсчет строк
 					} while (!f_in.eof());
 
-					f_in.clear(); //РѕС‡РёСЃС‚РєР° РїРѕС‚РѕРєР° РІРІРѕРґР° РёР· С„Р°Р№Р»Р°
-					f_in.seekg(0, std::ios::beg);//РІРѕР·РІСЂР°С‚ РєСѓСЂСЃРѕСЂР° РІ РЅР°С‡Р°Р»Рѕ С„Р°Р№Р»Р°
+					f_in.clear(); //очистка потока ввода из файла
+					f_in.seekg(0, std::ios::beg);//возврат курсора в начало файла
 
 					for (int i = 0; i < _x_line; ++i) {	
 						_x_text.clear();
@@ -37,19 +37,19 @@ bool ReadFileInVector::_OupenFileWriteVector() {
 					break;
 				}
 				else {
-					std::cout << "Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ РёР»Рё РЅРµ РґРѕСЃС‚СѓРїРµРЅ! РџРѕРІС‚РѕСЂРёС‚Рµ РІРІРѕРґ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ." << std::endl;
+					std::cout << "Файл не найден или не доступен! Повторите ввод пути к файлу." << std::endl;
 					_InputTransformWay();
 				}
 			} while (true);
 
 		} catch (...) {
-			std::cout << "РќРµ РёР·РІРµСЃС‚РЅР°СЏ РѕС€РёР±РєР°!" << std::endl;
+			std::cout << "Не известная ошибка!" << std::endl;
 			good = false;
 		}
 		return good;
 	}
 
-//Р·Р°РїРѕР»РЅРµРЅРёРµ РІС‚РѕСЂРёС‡РЅРѕРіРѕ РІРµРєС‚РѕСЂР°
+//заполнение вторичного вектора
 std::vector<std::string> ReadFileInVector::SetVector_2(const std::vector < std::string>& a) {
 
 		if (!a.empty()) {
@@ -62,19 +62,19 @@ std::vector<std::string> ReadFileInVector::SetVector_2(const std::vector < std::
 		return _out_data_file;
 	}
 
-//РІС‹РІРѕРґ РїРµСЂРІРёС‡РЅРѕРіРѕ РІРµРєС‚РѕСЂР°
+//вывод первичного вектора
 std::vector<std::string> ReadFileInVector::GetVector_1() { return _in_data_file; }
 
-//РІС‹РІРѕРґ РІС‚РѕСЂРёС‡РЅРѕРіРѕ РІРµРєС‚РѕСЂР°
+//вывод вторичного вектора
 std::vector<std::string> ReadFileInVector::GetVector_2() { return _out_data_file;	}
 
-//Р·Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІС‚РѕСЂРёС‡РЅРѕРіРѕ РІРµРєС‚РѕСЂР° РІ С„Р°Р№Р»
+//запись данных вторичного вектора в файл
 bool ReadFileInVector::InFileWriteVetor() {
 		_InputTransformWay();
 		bool good = false;
 		try {
 			do {
-				std::ofstream  f_oupen(_way); // РѕС‚РєСЂС‹Р»Рё С„Р°Р№Р» РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ РїСѓС‚Рё РЅР° Р·Р°РїРёСЃСЊ
+				std::ofstream  f_oupen(_way); // открыли файл по заданному пути на запись
 				if (f_oupen.is_open()) {
 
 					for (const auto& i : _out_data_file) {
@@ -86,23 +86,23 @@ bool ReadFileInVector::InFileWriteVetor() {
 					break;
 				}
 				else {
-					std::cout << "Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ РёР»Рё РЅРµС‚ РґРѕСЃС‚СѓРїР°! РџРѕРІС‚РѕСЂРёС‚Рµ РІРІРѕРґ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ." << std::endl;
+					std::cout << "Файл не найден или нет доступа! Повторите ввод пути к файлу." << std::endl;
 				}
 			} while (true);
 		}
 		catch(...) {
-			std::cout << "РќРµ РёР·РІРµСЃС‚РЅР°СЏ РѕС€РёР±РєР°!" << std::endl;
+			std::cout << "Не известная ошибка!" << std::endl;
 				good = false;
 		}
 		return good;
 	}
 
-//СЃС‡РёС‹РІР°РЅРёРµ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ Рё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ / РёР»Рё \ РІ "\\" РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ СЃ РєРѕРЅСЃРѕР»Рё
+//счиывание пути к файлу и преобразование / или \ в "\\" пути к файлу с консоли
 void ReadFileInVector::_InputTransformWay() {
 	_way.clear();
 	std::string way_file{ "" };
 
-		std::cout << "Р’РІРµРґРёС‚Рµ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ (РµСЃР»Рё С„Р°Р№Р» РЅРµ РІ РєРѕСЂРЅРµРІРѕРј РєР°С‚Р°Р»РѕРіРµ РїСЂРѕРіСЂР°РјРјС‹): ";
+		std::cout << "Введите путь к файлу (если файл не в корневом каталоге программы): ";
 		getline(std::cin >> std::ws, way_file);
 
 		for (auto& ch : way_file) {
@@ -117,7 +117,7 @@ void ReadFileInVector::_InputTransformWay() {
 		}
 	}
 
-//РІС‚РѕСЂРѕР№ РІР°СЂРёР°РЅ СЃС‡РёС‹РІР°РЅРёСЏ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ Рё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ / РёР»Рё \ РІ "\\" РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ СЃ РєРѕРЅСЃРѕР»Рё
+//второй вариан счиывания пути к файлу и преобразование / или \ в "\\" пути к файлу с консоли
 void ReadFileInVector::_InputTransformWay_2(const std::string& way_text) {
 	_way.clear();
 	
@@ -133,7 +133,7 @@ void ReadFileInVector::_InputTransformWay_2(const std::string& way_text) {
 	}	 
 }
 
-//РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїРµСЂРµРјРµРЅРЅС‹С… СЃРµРєС†РёРё Рё РїРµСЂРµРµРјРµРЅРЅРѕР№ 
+//преобразование переменных секции и перееменной 
 void ParsingIni::_ReadVar(const std::string& a) {
 	bool first = true;
 	_section_var.first.clear();
@@ -154,7 +154,7 @@ void ParsingIni::_ReadVar(const std::string& a) {
 	}
 }
 
-//С„РѕСЂРјРёСЂСѓРµС‚ РЅР°Р·РІР°РЅРёРµ Рё Р·РЅР°С‡РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ РІ СЃС‚СЂРѕРєРѕРІРѕРј С„РѕСЂРјР°С‚Рµ
+//формирует название и значение переменной в строковом формате
 std::pair <std::string, std::string> ParsingIni::_Read_String(const std::string& var_str) {
 	std::string name{}, var{};
 	bool first = true;
@@ -183,7 +183,7 @@ std::pair <std::string, std::string> ParsingIni::_Read_String(const std::string&
 	return { {name},{var} };
 }
 
-//РѕРїСЂРµРґРµР»СЏРµС‚ РІРѕР·РјРѕР¶РЅС‹Р№ С‚РёРї РїРµСЂРµРјРµРЅРЅРѕР№ РЅР° РѕСЃРЅРѕРІРµ Р°РЅР°Р»РёР·Р° РґР°РЅРЅС‹С… РїРѕ СЃС‚СЂРѕРєРµ (string, int, double)
+//определяет возможный тип переменной на основе анализа данных по строке (string, int, double)
 std::string ParsingIni::_Var_Type(const std::string& var) {
 	int count_point{ 0 }, count_min{ 0 };
 	bool str = false;
@@ -218,7 +218,7 @@ std::string ParsingIni::_Var_Type(const std::string& var) {
 	else { return "no data available!"; }
 }
 
-//РЅР°С…РѕРґРёС‚ РїРµСЂРµРјРµРЅРЅСѓСЋ РїРѕ Р·Р°РїСЂРѕСЃСѓ Рё РІС‹РґР°РµС‚ РµРµ Р·РЅР°С‡РµРЅРёРµ Рё С‚РёРї РЅР° РѕСЃРЅРѕРІРµ Р°РЅР°Р»РёР·Р° СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРµСЂРµРјРµРЅРЅРѕР№ РІ РІРёРґРµ string
+//находит переменную по запросу и выдает ее значение и тип на основе анализа структуры переменной в виде string
 std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string& text_var) {
 
 	_ReadVar(text_var);
@@ -234,7 +234,7 @@ std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string
 		for (const auto& str_var : _in_data_file) {
 
 			if (str_var == ('[' + _section_var.first + ']')) {
-				//std::cout << "<<< РЎРµРєС†РёСЏ РЅР°Р№РґРµРЅР°! >>>" << std::endl;
+				//std::cout << "<<< Секция найдена! >>>" << std::endl;
 				begin_section = true;
 				find_section = true;
 			}
@@ -242,7 +242,7 @@ std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string
 				if (begin_section == true) {
 					if ((str_var.at(0) == '[') && (str_var != ('[' + _section_var.first + ']'))) {
 						begin_section = false;
-						//std::cout << "<<< РЎРµРєС†РёСЏ Р·Р°РІРµСЂС€РµРЅР°! >>>" << std::endl;
+						//std::cout << "<<< Секция завершена! >>>" << std::endl;
 					}
 					else {
 
@@ -256,18 +256,18 @@ std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string
 			}
 		}
 		if (first == false && find_section==true) {
-			std::cout << "РџРµСЂРµРјРµРЅРЅР°СЏ РЅРµ РЅР°Р№РґРµРЅР°! РЎРїРёСЃРѕРє РІСЃРµС… РїРµСЂРµРјРµРЅРЅС‹С… СЃРµРєС†РёРё:" << std::endl;
+			std::cout << "Переменная не найдена! Список всех переменных секции:" << std::endl;
 			for (const auto& str_var : _in_data_file) {
 
 				if (str_var == ('[' + _section_var.first + ']')) {
-					//std::cout << "<<< РЎРµРєС†РёСЏ РЅР°Р№РґРµРЅР°! >>>" << std::endl;
+					//std::cout << "<<< Секция найдена! >>>" << std::endl;
 					begin_section = true;
 				}
 				else {
 					if (begin_section == true) {
 						if ((str_var.at(0) == '[') && (str_var != ('[' + _section_var.first + ']'))) {
 							begin_section = false;
-							//std::cout << "<<< РЎРµРєС†РёСЏ Р·Р°РІРµСЂС€РµРЅР°! >>>" << std::endl;
+							//std::cout << "<<< Секция завершена! >>>" << std::endl;
 						}
 						else {
 							if (_Read_String(str_var).first != "") {
@@ -280,7 +280,7 @@ std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string
 			}
 		}
 		if ( find_section == false) {
-			std::cout << "РЎРµРєС†РёСЏ РЅРµ РЅР°Р№РґРµРЅР°! РЎРїРёСЃРѕРє РІСЃРµС… РїРµСЂРµРјРµРЅРЅС‹С… Рё СЃРµРєС†РёР№:" << std::endl;
+			std::cout << "Секция не найдена! Список всех переменных и секций:" << std::endl;
 			for (const auto& str_var : _in_data_file) {
 				
 				if (!_Read_String(str_var).first.empty()) {
@@ -306,7 +306,7 @@ std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string
 	return _valu_type;
 }
 
-//СѓРґР°Р»РµРЅРёРµ РїСЂРѕР±РµР»РѕРІ РІ РЅР°Р·РІР°РЅРёРё СЃРµРєС†РёР№
+//удаление пробелов в названии секций
 void ParsingIni::_Transform_Section() {
 	std::string text{ "" };
 	bool begin_x = false;
@@ -332,7 +332,7 @@ void ParsingIni::_Transform_Section() {
 
 
 //----------------------------------------------------------------------------------------------
-// D:\РЎ++\Project\VSC\prj_netologiy_yandex\Course_1\Cours_parsing_ini\data_x.ini
+// D:\С++\Project\VSC\prj_netologiy_yandex\Course_1\Cours_parsing_ini\data_x.ini
 
 void block_1() {
 
@@ -341,27 +341,27 @@ void block_1() {
 
 	do {
 		std::string text_var;
-		std::cout << "Р’РµРґРёС‚Рµ РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С„РѕСЂРјР°С‚Рµ SectionX.varY: ";
+		std::cout << "Ведите переменную в формате SectionX.varY: ";
 		std::cin >> text_var;
 		std::string res = parser.Str_Value_Type(text_var).second;
 
 
 		if (res == "int") {
-			auto s = parser.Get_Value<long long int>(text_var); //С„РѕСЂРјР°С‚ РєР°Рє РІ Р·Р°РґР°РЅРёРё!!!!
+			auto s = parser.Get_Value<long long int>(text_var); //формат как в задании!!!!
 			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
 		}
 		else if (res == "double") {
-			auto s = parser.Get_Value<long double>(text_var);//С„РѕСЂРјР°С‚ РєР°Рє РІ Р·Р°РґР°РЅРёРё!!!!
+			auto s = parser.Get_Value<long double>(text_var);//формат как в задании!!!!
 			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
 		}
 		else if (res == "string") {
-			auto s = parser.Get_Value<std::string>(text_var);//С„РѕСЂРјР°С‚ РєР°Рє РІ Р·Р°РґР°РЅРёРё!!!!
+			auto s = parser.Get_Value<std::string>(text_var);//формат как в задании!!!!
 			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
 		}
 		else {
-			std::cout << "Р”Р°РЅРЅС‹Рµ РІ Р·Р°РґР°РЅРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№ РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚! Р—Р°РґР°Р№С‚Рµ РёРЅРѕРµ РёРјСЏ РїРµСЂРµРјРµРЅРЅРѕР№ РёР»Рё СЃРµРєС†РёРё!" << std::endl;
+			std::cout << "Данные в заданной переменной отсутствуют! Задайте иное имя переменной или секции!" << std::endl;
 		}
-		std::cout << "Р’РµСЃС‚Рё РґР°РЅРЅС‹Рµ Р·Р°РЅРѕРІРѕ? (0 - РґР°): ";
+		std::cout << "Вести данные заново? (0 - да): ";
 		char var_y{ '1'};
 		std::cin >> var_y;
 		if (var_y != '0') { break; }
@@ -376,27 +376,27 @@ void block_2() {
 
 	do {
 		std::string text_var;
-		std::cout << "Р’РµРґРёС‚Рµ РїРµСЂРµРјРµРЅРЅСѓСЋ РІ С„РѕСЂРјР°С‚Рµ SectionX.varY: ";
+		std::cout << "Ведите переменную в формате SectionX.varY: ";
 		std::cin >> text_var;
 		std::string res = parser.Str_Value_Type(text_var).second;
 
 
 		if (res == "int") {
-			auto s = parser.Get_Value<long long int>(text_var);//С„РѕСЂРјР°С‚ РєР°Рє РІ Р·Р°РґР°РЅРёРё!!!!
+			auto s = parser.Get_Value<long long int>(text_var);//формат как в задании!!!!
 			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
 		}
 		else if (res == "double") {
-			auto s = parser.Get_Value<long double>(text_var);//С„РѕСЂРјР°С‚ РєР°Рє РІ Р·Р°РґР°РЅРёРё!!!!
+			auto s = parser.Get_Value<long double>(text_var);//формат как в задании!!!!
 			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
 		}
 		else if (res == "string") {
-			auto s = parser.Get_Value<std::string>(text_var);//С„РѕСЂРјР°С‚ РєР°Рє РІ Р·Р°РґР°РЅРёРё!!!!
+			auto s = parser.Get_Value<std::string>(text_var);//формат как в задании!!!!
 			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
 		}
 		else {
-			std::cout << "Р”Р°РЅРЅС‹Рµ РІ Р·Р°РґР°РЅРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№ РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚! Р—Р°РґР°Р№С‚Рµ РёРЅРѕРµ РёРјСЏ РїРµСЂРµРјРµРЅРЅРѕР№ РёР»Рё СЃРµРєС†РёРё!" << std::endl;
+			std::cout << "Данные в заданной переменной отсутствуют! Задайте иное имя переменной или секции!" << std::endl;
 		}
-		std::cout << "Р’РµСЃС‚Рё РґР°РЅРЅС‹Рµ Р·Р°РЅРѕРІРѕ? (0 - РґР°): " ;
+		std::cout << "Вести данные заново? (0 - да): " ;
 		char var_y{ '1' };
 		std::cin >> var_y;
 		if (var_y != '0') { break; }
