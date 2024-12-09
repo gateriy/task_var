@@ -1,11 +1,11 @@
-#include "AllConfigTask.h"
+#include "Config.h"
 
-void AllConfigTask::InteractiveVarTask(const std::string& v_text) {
+void Config::InteractiveVarTask(const std::string& v_text) {
 
 	ConsolLang1251();
 
 	do {
-		std::cout << "\033c";//РѕС‡РёСЃС‚РєР° РєРѕРЅСЃРѕР»Рё
+		std::cout << "\033c";//очистка консоли
 		text = v_text;
 
 		VarTaskNumber();
@@ -13,13 +13,14 @@ void AllConfigTask::InteractiveVarTask(const std::string& v_text) {
 	} while (ExitProgram());
 }
 
-enum class AllConfigTask::Task {
+enum class Config::Task {
 	exit_0,
-	task_1,
-	task_2,
+	block_1,
+	block_2,
+	
 };
 
-void AllConfigTask::VarTaskNumber() {
+void Config::VarTaskNumber() {
 
 	std::cout << text;
 
@@ -29,26 +30,25 @@ void AllConfigTask::VarTaskNumber() {
 		std::cin >> number_task;
 		std::cout << std::endl;
 
-		if (number_task == "1" || number_task == "2" || number_task == "0") {
+		if (number_task == "1" || number_task == "2" || number_task == "3" || number_task == "0") {
 
-			std::cout << "\033c";//РѕС‡РёСЃС‚РєР° РєРѕРЅСЃРѕР»Рё
+			std::cout << "\033c";//очистка консоли
 
-			//if(number_task != "0") {
-			std::cout << "Task " << number_task << ":" << std::endl;
+			std::cout << "Блок " << number_task << ":" << std::endl;
 			std::cout << "-----------------------------------------" << std::endl;
-			//}
+
 			switch (stoi(number_task))
 			{
-			case(static_cast<int>(Task::task_1)):
-				Task_1();
+			case(static_cast<int>(Task::block_1)):
+				block_1();
 				exit = false;
 				break;
-			case(static_cast<int>(Task::task_2)):
-				Task_2();
+			case(static_cast<int>(Task::block_2)):
+				block_2();
 				exit = false;
-				break;
+				break;		
 			case(static_cast<int>(Task::exit_0)):
-				std::cout << "\033c";//РѕС‡РёСЃС‚РєР° РєРѕРЅСЃРѕР»Рё
+				std::cout << "\033c";//очистка консоли
 				exit = false;
 				break;
 			}
@@ -61,7 +61,7 @@ void AllConfigTask::VarTaskNumber() {
 	} while (exit);
 }
 
-bool AllConfigTask::ExitProgram()
+bool Config::ExitProgram()
 {
 	char exit_Y_N{};
 	do
@@ -83,7 +83,7 @@ bool AllConfigTask::ExitProgram()
 	} while (true);
 }
 
-void AllConfigTask::ConsolLang1251() {
+void Config::ConsolLang1251() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 }

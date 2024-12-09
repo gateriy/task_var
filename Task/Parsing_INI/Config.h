@@ -1,19 +1,16 @@
-#pragma once
-#ifndef ALLCONFIGTASK_H
-#define ALLCONFIGTASK_H
+#ifndef CONFIG_H
+#define CONFIG_H
 
 #include <iostream>
 #include <string>
 #include <Windows.h>
 #include <vector>
-#include <algorithm>
+#include <fstream>
+#include <typeinfo>
+ 
+#include "Read_file.h"
 
-
-
-#include"Task_1.h"
-#include"Task_2.h"
-
-class AllConfigTask {
+class Config {
 
 public:
 	void InteractiveVarTask(const std::string& v_text);
@@ -28,4 +25,4 @@ private:
 	void ConsolLang1251();
 };
 
-#endif // !ALLCONFIGTASK
+#endif

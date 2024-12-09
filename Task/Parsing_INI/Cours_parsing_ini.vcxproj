@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{117ebac0-f641-4eb1-b009-50f62278eeb2}</ProjectGuid>
-    <RootNamespace>Taskmove</RootNamespace>
+    <ProjectGuid>{11b6bfac-4b20-4d9e-ab65-df6c9a8a49b9}</ProjectGuid>
+    <RootNamespace>Coursparsingini</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,15 +128,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AllConfigTask.cpp" />
-    <ClCompile Include="Task_1.cpp" />
-    <ClCompile Include="Task_2.cpp" />
-    <ClCompile Include="Task_move.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Cours_parsing_ini.cpp" />
+    <ClCompile Include="Read_file.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllConfigTask.h" />
-    <ClInclude Include="Task_1.h" />
-    <ClInclude Include="Task_2.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Read_file.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
