@@ -6,13 +6,16 @@ bool ReadFileInVector::_OupenFileWriteVector() {
 
 		_in_data_file.clear();
 		bool good = false;
-
-		try {
-			do {
+				
+		//	do {
 				
 				_x_line = 0;
 				
 				std::ifstream  f_in(_way); // открыли файл по заданному пути на чтение
+
+				if (!f_in) {
+					throw std::ios_base::failure("The file was not found or is not available!");
+				}
 				
 				if (f_in.is_open()) {
 
@@ -29,27 +32,28 @@ bool ReadFileInVector::_OupenFileWriteVector() {
 						getline(f_in >> std::ws, _x_text);
 						if (!_x_text.empty()) {
 							_in_data_file.push_back(_x_text);
+
+							if (sizeof(_in_data_file) > _MAX_SISE_V) {
+								throw std::bad_alloc();
+							}
 						}
 					};
 
 					f_in.close();
 					good = true;
-					break;
+					//break;
 				}
-				else {
+				/*else {
 					std::cout << "Файл не найден или не доступен! Повторите ввод пути к файлу." << std::endl;
 					_InputTransformWay();
-				}
-			} while (true);
+				}*/
+			//} while (true);
 
-		} catch (...) {
-			std::cout << "Не известная ошибка!" << std::endl;
-			good = false;
-		}
 		return good;
 	}
 
 //заполнение вторичного вектора
+/*
 std::vector<std::string> ReadFileInVector::SetVector_2(const std::vector < std::string>& a) {
 
 		if (!a.empty()) {
@@ -61,14 +65,16 @@ std::vector<std::string> ReadFileInVector::SetVector_2(const std::vector < std::
 		}
 		return _out_data_file;
 	}
+	*/
 
 //вывод первичного вектора
-std::vector<std::string> ReadFileInVector::GetVector_1() { return _in_data_file; }
+//std::vector<std::string> ReadFileInVector::GetVector_1() { return _in_data_file; }
 
 //вывод вторичного вектора
-std::vector<std::string> ReadFileInVector::GetVector_2() { return _out_data_file;	}
+//std::vector<std::string> ReadFileInVector::GetVector_2() { return _out_data_file;	}
 
 //запись данных вторичного вектора в файл
+/*
 bool ReadFileInVector::InFileWriteVetor() {
 		_InputTransformWay();
 		bool good = false;
@@ -96,9 +102,11 @@ bool ReadFileInVector::InFileWriteVetor() {
 		}
 		return good;
 	}
+	*/
 
 //счиывание пути к файлу и преобразование / или \ в "\\" пути к файлу с консоли
-void ReadFileInVector::_InputTransformWay() {
+//noexcept
+void ReadFileInVector::_InputTransformWay() noexcept {
 	_way.clear();
 	std::string way_file{ "" };
 
@@ -117,8 +125,9 @@ void ReadFileInVector::_InputTransformWay() {
 		}
 	}
 
-//второй вариан счиывания пути к файлу и преобразование / или \ в "\\" пути к файлу с консоли
-void ReadFileInVector::_InputTransformWay_2(const std::string& way_text) {
+//второй вариан преобразование пути к файлу / или \ в "\\" по переданной переменной
+//noexcept
+void ReadFileInVector::_InputTransformWay_2(const std::string& way_text) noexcept {
 	_way.clear();
 	
 	for (auto& ch : way_text) {
@@ -133,8 +142,9 @@ void ReadFileInVector::_InputTransformWay_2(const std::string& way_text) {
 	}	 
 }
 
-//преобразование переменных секции и перееменной 
-void ParsingIni::_ReadVar(const std::string& a) {
+//преобразование переменных секции и перееменной из переданной строки
+//noexcept
+void ParsingIni::_ReadVar(const std::string& a) noexcept {
 	bool first = true;
 	_section_var.first.clear();
 	_section_var.second.clear();
@@ -155,7 +165,8 @@ void ParsingIni::_ReadVar(const std::string& a) {
 }
 
 //формирует название и значение переменной в строковом формате
-std::pair <std::string, std::string> ParsingIni::_Read_String(const std::string& var_str) {
+//noexcept
+std::pair <std::string, std::string> ParsingIni::_Read_String(const std::string& var_str) noexcept{
 	std::string name{}, var{};
 	bool first = true;
 
@@ -184,7 +195,8 @@ std::pair <std::string, std::string> ParsingIni::_Read_String(const std::string&
 }
 
 //определяет возможный тип переменной на основе анализа данных по строке (string, int, double)
-std::string ParsingIni::_Var_Type(const std::string& var) {
+//noexcept
+std::string ParsingIni::_Var_Type(const std::string& var) noexcept{
 	int count_point{ 0 }, count_min{ 0 };
 	bool str = false;
 
@@ -219,7 +231,8 @@ std::string ParsingIni::_Var_Type(const std::string& var) {
 }
 
 //находит переменную по запросу и выдает ее значение и тип на основе анализа структуры переменной в виде string
-std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string& text_var) {
+//noexcept
+std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string& text_var) noexcept {
 
 	_ReadVar(text_var);
 	std::string res{}, type_x{};;
@@ -307,26 +320,29 @@ std::pair<std::string, std::string> ParsingIni::Str_Value_Type(const std::string
 }
 
 //удаление пробелов в названии секций
-void ParsingIni::_Transform_Section() {
+//noexcept
+void ParsingIni::_Transform_Section() noexcept {
 	std::string text{ "" };
 	bool begin_x = false;
 
-	for (auto& i : _in_data_file) {
-		begin_x = false;
-		text.clear();
+	if (!_in_data_file.empty()) {
+		for (auto& i : _in_data_file) {
+			begin_x = false;
+			text.clear();
 
-		for (auto& x : i) {
+			for (auto& x : i) {
 
-			if (x == '[') { begin_x = true; }
+				if (x == '[') { begin_x = true; }
 
-			if (begin_x == true) {
+				if (begin_x == true) {
 
-				text = text + x;
+					text = text + x;
 
+				}
+				if (x == ']') { break; }
 			}
-			if (x == ']') { break; }
+			if (begin_x == true) { i = text; }
 		}
-		if (begin_x == true) { i = text; }
 	}
 }
 
@@ -335,71 +351,106 @@ void ParsingIni::_Transform_Section() {
 // D:\С++\Project\VSC\prj_netologiy_yandex\Course_1\Cours_parsing_ini\data_x.ini
 
 void block_1() {
+	try {
+		ParsingIni parser("data_x.ini");
 
-	Input_Output_Var<std::string, std::string> i_o_str;	
-	ParsingIni parser("data_x.ini");
-
-	do {
-		std::string text_var;
-		std::cout << "Ведите переменную в формате SectionX.varY: ";
-		std::cin >> text_var;
-		std::string res = parser.Str_Value_Type(text_var).second;
+		do {
+			std::string text_var;
+			std::cout << "Ведите переменную в формате SectionX.varY: ";
+			std::cin >> text_var;
+			std::string res = parser.Str_Value_Type(text_var).second;
 
 
-		if (res == "int") {
-			auto s = parser.Get_Value<long long int>(text_var); //формат как в задании!!!!
-			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
-		}
-		else if (res == "double") {
-			auto s = parser.Get_Value<long double>(text_var);//формат как в задании!!!!
-			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
-		}
-		else if (res == "string") {
-			auto s = parser.Get_Value<std::string>(text_var);//формат как в задании!!!!
-			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
-		}
-		else {
-			std::cout << "Данные в заданной переменной отсутствуют! Задайте иное имя переменной или секции!" << std::endl;
-		}
-		std::cout << "Вести данные заново? (0 - да): ";
-		char var_y{ '1'};
-		std::cin >> var_y;
-		if (var_y != '0') { break; }
-	} while (true);
+			if (res == "int") {
+				auto s = parser.Get_Value<long long int>(text_var); //формат как в задании!!!!
+				std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
+			}
+			else if (res == "double") {
+				auto s = parser.Get_Value<long double>(text_var);//формат как в задании!!!!
+				std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
+			}
+			else if (res == "string") {
+				auto s = parser.Get_Value<std::string>(text_var);//формат как в задании!!!!
+				std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
+			}
+			else {
+				std::cout << "Данные в заданной переменной отсутствуют! Задайте иное имя переменной или секции!" << std::endl;
+			}
+			std::cout << "Вести данные заново? (0 - да): ";
+			char var_y{ '1' };
+			std::cin >> var_y;
+			if (var_y != '0') { break; }
+		} while (true);
+
+	}
+	catch (const std::ios_base::failure& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Произошла ошибка! Обработка приостановлена! " << std::endl;
+	}
+	catch (const std::bad_alloc& a) {
+		std::cerr << "Error: " << a.what() << std::endl;
+		std::cerr << "Превышение объема выделенной памяти при чтении файла! Обработка приостановлена! " << std::endl;
+	}
+	catch (const My_Exception1& b) {
+		std::cerr << "Error: " << b.what() << std::endl;
+		std::cerr << "Ошибка конвертации! Обработка приостановлена! " << b.what() << std::endl;
+	}
+	catch (...) {
+		std::cerr << "Error: " << "???" << std::endl;
+		std::cerr << "Не известная ошибка! " << std::endl;
+	};
 
 };
 
 void block_2() {
 
-	Input_Output_Var<std::string, int> i_o_var;
-	ParsingIni parser;
+	try {
+		ParsingIni parser;
 
-	do {
-		std::string text_var;
-		std::cout << "Ведите переменную в формате SectionX.varY: ";
-		std::cin >> text_var;
-		std::string res = parser.Str_Value_Type(text_var).second;
+		do {
+			std::string text_var;
+			std::cout << "Ведите переменную в формате SectionX.varY: ";
+			std::cin >> text_var;
+			std::string res = parser.Str_Value_Type(text_var).second;
 
 
-		if (res == "int") {
-			auto s = parser.Get_Value<long long int>(text_var);//формат как в задании!!!!
-			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
-		}
-		else if (res == "double") {
-			auto s = parser.Get_Value<long double>(text_var);//формат как в задании!!!!
-			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
-		}
-		else if (res == "string") {
-			auto s = parser.Get_Value<std::string>(text_var);//формат как в задании!!!!
-			std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
-		}
-		else {
-			std::cout << "Данные в заданной переменной отсутствуют! Задайте иное имя переменной или секции!" << std::endl;
-		}
-		std::cout << "Вести данные заново? (0 - да): " ;
-		char var_y{ '1' };
-		std::cin >> var_y;
-		if (var_y != '0') { break; }
-	} while (true);
+			if (res == "int") {
+				auto s = parser.Get_Value<long long int>(text_var);//формат как в задании!!!!
+				std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
+			}
+			else if (res == "double") {
+				auto s = parser.Get_Value<long double>(text_var);//формат как в задании!!!!
+				std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
+			}
+			else if (res == "string") {
+				auto s = parser.Get_Value<std::string>(text_var);//формат как в задании!!!!
+				std::cout << "[" << s << "] <- [" << typeid(s).name() << "]" << std::endl;
+			}
+			else {
+				std::cout << "Данные в заданной переменной отсутствуют! Задайте иное имя переменной или секции!" << std::endl;
+			}
+			std::cout << "Вести данные заново? (0 - да): ";
+			char var_y{ '1' };
+			std::cin >> var_y;
+			if (var_y != '0') { break; }
+		} while (true);
+
+	}
+	catch (const std::ios_base::failure& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "Произошла ошибка! Обработка приостановлена! " << std::endl;
+	}
+	catch (const std::bad_alloc& a) {
+		std::cerr << "Error: " << a.what() << std::endl;
+		std::cerr << "Превышение объема выделенной памяти при чтении файла! Обработка приостановлена! " << std::endl;
+	}
+	catch (const My_Exception1& b) {
+		std::cerr << "Error: " << b.what() << std::endl;
+		std::cerr << "Ошибка конвертации! Обработка приостановлена! " << b.what() << std::endl;
+	}
+	catch (...) {
+		std::cerr << "Error: " << "???" << std::endl;
+		std::cerr << "Не известная ошибка! " << std::endl;
+	};
 
 };

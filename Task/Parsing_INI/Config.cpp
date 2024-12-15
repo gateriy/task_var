@@ -1,6 +1,6 @@
 #include "Config.h"
 
-void Config::InteractiveVarTask(const std::string& v_text) {
+void Config::InteractiveVarTask(const std::string& v_text) noexcept {
 
 	ConsolLang1251();
 
@@ -20,7 +20,7 @@ enum class Config::Task {
 	
 };
 
-void Config::VarTaskNumber() {
+void Config::VarTaskNumber() noexcept {
 
 	std::cout << text;
 
@@ -61,7 +61,7 @@ void Config::VarTaskNumber() {
 	} while (exit);
 }
 
-bool Config::ExitProgram()
+bool Config::ExitProgram() noexcept
 {
 	char exit_Y_N{};
 	do
@@ -83,7 +83,7 @@ bool Config::ExitProgram()
 	} while (true);
 }
 
-void Config::ConsolLang1251() {
+void Config::ConsolLang1251() noexcept{
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 }

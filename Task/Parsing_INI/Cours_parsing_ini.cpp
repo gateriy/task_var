@@ -1,4 +1,4 @@
-﻿// Cours_parsing_ini.cpp :
+// Cours_parsing_ini.cpp :
 
 #include <iostream>
 #include <string>
