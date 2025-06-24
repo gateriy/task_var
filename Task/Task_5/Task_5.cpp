@@ -1,52 +1,11 @@
-п»ї// Task_4.cpp: РѕРїСЂРµРґРµР»СЏРµС‚ С‚РѕС‡РєСѓ РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+п»ї// Task_5.cpp 
 
-#include "Task_4.h"
+#include "Task_5.h"
 
-/*
-Р¦РµР»СЊ Р·Р°РґР°РЅРёСЏ
-РќР°СѓС‡РёС‚СЊСЃСЏ РґРµР»Р°С‚СЊ SELECT - Р·Р°РїСЂРѕСЃС‹ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С… PostgreSQL РёР· РЎ++, 
-С‡С‚РѕР±С‹ РїРѕР»СѓС‡Р°С‚СЊ РґР°РЅРЅС‹Рµ Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РёС… РІ C++ РїСЂРёР»РѕР¶РµРЅРёРё.
-РќР°СѓС‡РёС‚СЊСЃСЏ РґРµР»Р°С‚СЊ INSERT - , UPDATE - Рё DELETE - Р·Р°РїСЂРѕСЃС‹ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С… PostgreSQL 
-РёР· РЎ++ РґР»СЏ РјР°РЅРёРїСѓР»СЏС†РёРё РґР°РЅРЅС‹РјРё РёР· C++ РїСЂРёР»РѕР¶РµРЅРёСЏ.
-
-Р—Р°РґР°РЅРёРµ 1
-РЎРѕР·РґР°Р№С‚Рµ РїСЂРѕРіСЂР°РјРјСѓ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РєР»РёРµРЅС‚Р°РјРё РЅР° C++.
-РќСѓР¶РЅРѕ С…СЂР°РЅРёС‚СЊ РїРµСЂСЃРѕРЅР°Р»СЊРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РєР»РёРµРЅС‚Р°С… :
-
-РёРјСЏ,
-С„Р°РјРёР»РёСЏ,
-email,
-С‚РµР»РµС„РѕРЅ.
-
-РЎР»РѕР¶РЅРѕСЃС‚СЊ РІ С‚РѕРј, С‡С‚Рѕ С‚РµР»РµС„РѕРЅ Сѓ РєР»РёРµРЅС‚Р° РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµ РѕРґРёРЅ, Р° РґРІР°, С‚СЂРё Рё РґР°Р¶Рµ Р±РѕР»СЊС€Рµ.
-Рђ РјРѕР¶РµС‚ Рё РЅРµ Р±С‹С‚СЊ вЂ” РЅР°РїСЂРёРјРµСЂ, РµСЃР»Рё РѕРЅ РЅРµ Р·Р°С…РѕС‚РµР» РµРіРѕ РѕСЃС‚Р°РІР»СЏС‚СЊ.
-
-Р’Р°Рј РЅСѓР¶РЅРѕ СЂР°Р·СЂР°Р±РѕС‚Р°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ Р‘Р” РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё Рё РЅР°РїРёСЃР°С‚СЊ РєР»Р°СЃСЃ 
-РЅР° РЎ++ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РґР°РЅРЅС‹РјРё СЃРѕ СЃР»РµРґСѓСЋС‰РёРјРё РјРµС‚РѕРґР°РјРё :
-
-РњРµС‚РѕРґ, СЃРѕР·РґР°СЋС‰РёР№ СЃС‚СЂСѓРєС‚СѓСЂСѓ Р‘Р”(С‚Р°Р±Р»РёС†С‹).
-РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ РґРѕР±Р°РІРёС‚СЊ РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°.
-РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ РґРѕР±Р°РІРёС‚СЊ С‚РµР»РµС„РѕРЅ РґР»СЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»РёРµРЅС‚Р°.
-РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ РёР·РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Рµ Рѕ РєР»РёРµРЅС‚Рµ.
-РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ СѓРґР°Р»РёС‚СЊ С‚РµР»РµС„РѕРЅ Сѓ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»РёРµРЅС‚Р°.
-РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ СѓРґР°Р»РёС‚СЊ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»РёРµРЅС‚Р°.
-РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ РЅР°Р№С‚Рё РєР»РёРµРЅС‚Р° РїРѕ РµРіРѕ РґР°РЅРЅС‹Рј вЂ” РёРјРµРЅРё, С„Р°РјРёР»РёРё, email РёР»Рё С‚РµР»РµС„РѕРЅСѓ.
-
-Р­С‚Рё РјРµС‚РѕРґС‹ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹, РЅРѕ СЌС‚Рѕ РЅРµ Р·РЅР°С‡РёС‚, С‡С‚Рѕ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ РѕРЅРё.
-РњРѕР¶РЅРѕ СЃРѕР·РґР°РІР°С‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РјРµС‚РѕРґС‹ Рё РєР»Р°СЃСЃС‹.
-РўР°РєР¶Рµ РїСЂРµРґРѕСЃС‚Р°РІСЊС‚Рµ РєРѕРґ, РґРµРјРѕРЅСЃС‚СЂРёСЂСѓСЋС‰РёР№ СЂР°Р±РѕС‚Сѓ РЅР°РїРёСЃР°РЅРЅРѕРіРѕ РІР°РјРё РєР»Р°СЃСЃР°.
-
-РјРµС‚РѕРґС‹
-transaction_base::exec "CREATE TABLE".
-transaction_base::exec "INSERT".
-transaction_base::exec "UPDATE".
-transaction_base::exec "DELETE".
-transaction_base::query "SELECT".
-*/
 
 std::string utf8_to_cp1251(std::string const& utf8)
 {
-	
+
 	if (!utf8.empty())
 	{
 		int wchlen = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), utf8.size(), NULL, 0);
@@ -141,15 +100,6 @@ void io_db_pq::ConsolLang1251() {
 	SetConsoleOutputCP(1251);
 }
 
-enum class io_db_pq::tables {
-
-	names,
-	surnames,
-	emails,
-	telephone
-	
-};
-
 void io_db_pq::VarTaskNumber() {
 
 	std::cout << std::endl;
@@ -167,10 +117,10 @@ void io_db_pq::VarTaskNumber() {
 			else { var_correct = false; }
 		};
 
-		if (var_correct==true) {
+		if (var_correct == true) {
 
 			std::cout << "\033c";//РѕС‡РёСЃС‚РєР° РєРѕРЅСЃРѕР»Рё
-			std::cout << "Р—Р°РґР°С‡Р°: " << var_text.at(var_n+1) << ":" << std::endl;
+			std::cout << "Р—Р°РґР°С‡Р°: " << var_text.at(var_n + 1) << ":" << std::endl;
 			std::cout << "-----------------------------------------" << std::endl;
 
 			switch (var_n)
@@ -259,17 +209,104 @@ void io_db_pq::check_str_to_int(std::string& text) {
 	} while (good == false);
 };
 
+//---------------------
+class publisher_tabl {
+public:
+	std::string name;
+	//std::string phone = "";
+	//int karma = 0;
+	template<class Action>
+	void persist(Action& a)
+	{
+		Wt::Dbo::field(a, name, "name");
+		//Wt::Dbo::field(a, phone, "phone");
+		//Wt::Dbo::field(a, karma, "karma");
+	}
+};
+
+class shop_tabl {
+public:
+	std::string name = "";
+	template<class Action>
+	void persist(Action& a)
+	{
+		Wt::Dbo::field(a, name, "name");
+	}
+};
+
+class User {
+public:
+	std::string name = "";
+	std::string phone = "";
+	int karma = 0;
+	template<class Action>
+	void persist(Action& a)
+	{
+		Wt::Dbo::field(a, name, "name");
+		Wt::Dbo::field(a, phone, "phone");
+		Wt::Dbo::field(a, karma, "karma");
+	}
+};
+
+//---------------------
+
 //СЃРѕР·РґР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ Р±Р°Р·С‹ РґР°РЅРЅС‹С… (С‚Р°Р±Р»РёС†)
 void io_db_pq::method_1() {
 
-	SetConsoleOutputCP(CP_UTF8);
+	//SetConsoleOutputCP(CP_UTF8);
+
+	std::string connectionString = "host=localhost user=postgres password=1015 port=5433 dbname=test_2";
+	
+	//"host=127.0.0.1 user=test password=test port=5432 dbname=test"
+	
+	//Wt::Dbo::backend::Postgres::Postgres( "test_1");
+	//auto postgres = Wt::Dbo::backend::Postgres(connectionString);
+	//postgres.connect(connectionString);
+	//postgres.executeSql("pg_isready -d test_1 -h localhost -p 5432 -U postgres");
+
+	
+	auto postgres = std::make_unique<Wt::Dbo::backend::Postgres>(connectionString);
+	Wt::Dbo::Session session;
+	session.setConnection(std::move(postgres));
+
+
+
+	//Wt::Dbo::Transaction transaction(session);
+	session.execute("select 1;");
+	//session.execute("create table if not exists publisher_tabl (names varchar(200) not null,unique(names)); ");
+
+	
+
+		//session.execute("SET CLIENT_ENCODING TO 'WIN1251';"); // РєРѕСЃС‚С‹Р»СЊ РґР»СЏ РѕС‚РїСЂР°РІРєРё СЂСѓСЃСЃРєРёС… СЃРёРјРІРѕР»РѕРІ РІ Р‘Р”
+		//session.mapClass<publisher_tabl>("publisher_tabl");
+		//session.mapClass<shop_tabl>("shop_tabl");		
+		//session.createTables();
+		std::cout << "РўР°Р±Р»РёС†Р° 'publisher_tabl' СЃРѕР·РґР°РЅР° РёР»Рё СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚." << std::endl;
+	
+	
+	{
+		//Wt::Dbo::Transaction transaction(session);
+		//auto newRecord = session.add(std::make_unique<publisher_tabl>(publisher_tabl{ "РђСЂРєР°РґРёР№" }));
+		//std::cout << "Р—Р°РїРёСЃСЊ РґРѕР±Р°РІР»РµРЅР°: name = " << newRecord->name
+		//	<< ", value = "  << std::endl;
+		//transaction.commit();
+	}
+
+	//session.mapClass<publisher_tabl>("publisher_tabl");
+	//session.mapClass<shop_tabl>("shop_tabl");
+
+	//session.createTables();
+	
+
+
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
 		"dbname=test_1 "
 		"user=postgres "
 		"password=1015");
-		
+
 	if (db_1.is_open()) {
 
 		pqxx::work tx{ db_1 };
@@ -294,13 +331,14 @@ void io_db_pq::method_1() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
 //СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р° Р±РµР· С‚РµР»РµС„РѕРЅР°
 void io_db_pq::method_2() {
 
-	std::string var,names, surnames, email;
+	std::string var, names, surnames, email;
 	std::cout << std::endl;
 	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РєР»РёРµРЅС‚Р°: ";
 	std::cin >> var;
@@ -314,7 +352,7 @@ void io_db_pq::method_2() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
-
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -332,6 +370,7 @@ void io_db_pq::method_2() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -339,7 +378,7 @@ void io_db_pq::method_2() {
 void io_db_pq::method_3() {
 
 	std::string var, names, surnames, email, telephones_cod, telephones;
-		
+
 	std::cout << std::endl;
 	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РєР»РёРµРЅС‚Р°: ";
 	std::cin >> var;
@@ -361,6 +400,7 @@ void io_db_pq::method_3() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -377,6 +417,7 @@ void io_db_pq::method_3() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -384,7 +425,7 @@ void io_db_pq::method_3() {
 void io_db_pq::method_4() {
 
 	std::string var, names, surnames, email, names_n, surnames_n, email_n;
-	
+
 	std::cout << std::endl;
 	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РєР»РёРЅС‚Р°: ";
 	std::cin >> var;
@@ -408,6 +449,7 @@ void io_db_pq::method_4() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -425,6 +467,7 @@ void io_db_pq::method_4() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -452,6 +495,7 @@ void io_db_pq::method_5() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -468,6 +512,7 @@ void io_db_pq::method_5() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -475,7 +520,7 @@ void io_db_pq::method_5() {
 void io_db_pq::method_6() {
 
 	std::string var, names, surnames, email;
-	
+
 	std::cout << std::endl;
 	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РєР»РёРµРЅС‚Р°: ";
 	std::cin >> var;
@@ -489,6 +534,7 @@ void io_db_pq::method_6() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -506,6 +552,7 @@ void io_db_pq::method_6() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -513,7 +560,7 @@ void io_db_pq::method_6() {
 void io_db_pq::method_7() {
 
 	std::string var, names, surnames, email, telephones_cod, telephones;
-	
+
 	std::cout << std::endl;
 	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РєР»РёРµРЅС‚Р°: ";
 	std::cin >> var;
@@ -521,6 +568,7 @@ void io_db_pq::method_7() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -532,10 +580,10 @@ void io_db_pq::method_7() {
 
 		pqxx::work tx{ db_1 };
 
-		for (auto [id_fio, names, surnames, email] : tx.query<int, std::string, std::string, std::string> (
+		for (auto [id_fio, names, surnames, email] : tx.query<int, std::string, std::string, std::string>(
 			"select id_fio, names, surnames, email  from fio where names = '" + tx.esc(names) + "';"))
 		{
-			std::cout << id_fio<<"\t\t"<<names << " \t\t" << surnames << "\t\t" << email << ".\n";
+			std::cout << id_fio << "\t\t" << names << " \t\t" << surnames << "\t\t" << email << ".\n";
 		}
 		std::cout << std::endl;
 
@@ -544,7 +592,8 @@ void io_db_pq::method_7() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
-	SetConsoleOutputCP(1251);	
+	*/
+	SetConsoleOutputCP(1251);
 };
 
 //РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ РЅР°Р№С‚Рё РєР»РёРµРЅС‚Р° РїРѕ РµРіРѕ РґР°РЅРЅС‹Рј вЂ” С„Р°РјРёР»РёРё
@@ -559,6 +608,7 @@ void io_db_pq::method_8() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -582,6 +632,7 @@ void io_db_pq::method_8() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -590,13 +641,14 @@ void io_db_pq::method_9() {
 
 	std::string var, names, surnames, email, telephones_cod, telephones;
 
-	std::cout << std::endl;	
+	std::cout << std::endl;
 	std::cout << "Р’РІРµРґРёС‚Рµ email РєР»РёРµРЅС‚Р°: ";
 	std::cin >> var;
-	email = cp1251_to_utf8(var);	
+	email = cp1251_to_utf8(var);
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -620,6 +672,7 @@ void io_db_pq::method_9() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -639,6 +692,7 @@ void io_db_pq::method_10() {
 	std::cout << std::endl;
 
 	SetConsoleOutputCP(CP_UTF8);
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -654,7 +708,7 @@ void io_db_pq::method_10() {
 		//where id_FIO = (select t.id_fio from telephone as t where t.telephones_cod = '+7' and t.telephones = 9055774730);
 
 		for (auto [id_fio, names, surnames, email] : tx.query<int, std::string, std::string, std::string>(
-			"select id_fio, names, surnames, email  from fio where id_FIO = (select t.id_fio from telephone as t where t.telephones_cod = '" + tx.esc(telephones_cod) + "' and t.telephones = "+ tx.esc(telephones) +");"))
+			"select id_fio, names, surnames, email  from fio where id_FIO = (select t.id_fio from telephone as t where t.telephones_cod = '" + tx.esc(telephones_cod) + "' and t.telephones = " + tx.esc(telephones) + ");"))
 		{
 			std::cout << id_fio << "\t\t" << names << " \t\t" << surnames << "\t\t" << email << ".\n";
 		}
@@ -665,6 +719,7 @@ void io_db_pq::method_10() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 
 };
@@ -673,7 +728,7 @@ void io_db_pq::method_10() {
 void io_db_pq::method_11() {
 
 	SetConsoleOutputCP(CP_UTF8);
-
+	/*
 	pqxx::connection db_1(
 		"host=localhost "
 		"port=5432 "
@@ -692,6 +747,7 @@ void io_db_pq::method_11() {
 	else {
 		std::cout << "РќРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РїРѕРІС‚РѕСЂРёС‚Рµ Р·Р°РїСЂРѕСЃ Р·Р°РЅРѕРІРѕ!" << std::endl;
 	}
+	*/
 	SetConsoleOutputCP(1251);
 };
 
@@ -706,12 +762,14 @@ int main()
 
 	do {
 		try {
-			io_db_pq io_db_pq_1;
 
+
+			io_db_pq io_db_pq_1;
 			io_db_pq_1.InteractiveVarTask();
 			check = true;
 		}
-		catch (pqxx::sql_error& e) {
+		
+		catch (const Wt::Dbo::Exception& e) {
 			std::cerr << e.what() << std::endl;
 			SetConsoleOutputCP(1251);
 			std::cout << "РџСЂРѕРґРѕР»Р¶РёС‚СЊ РІРІРѕРґ? (y/n): ";
@@ -724,6 +782,7 @@ int main()
 			}
 
 		}
+		
 		catch (std::exception& e) {
 			std::cerr << e.what() << std::endl;
 			SetConsoleOutputCP(1251);
@@ -740,3 +799,5 @@ int main()
 
 	return 0;
 }
+
+
