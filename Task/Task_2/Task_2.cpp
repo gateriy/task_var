@@ -1,8 +1,32 @@
-// Task_2.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+п»ї
+/*
+Р—Р°РґР°РЅРёРµ 2
+РџСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂ
+РЎРѕР·РґР°Р№С‚Рµ РєРѕРЅСЃРѕР»СЊРЅРѕРµ РїСЂРёР»РѕР¶РµРЅРёРµ РґР»СЏ РёРјРёС‚Р°С†РёРё РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕРіРѕ СЂР°СЃС‡С‘С‚Р°.
+РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕС‚РѕРєРѕРІ, РґР»РёРЅР° СЂР°СЃС‡С‘С‚Р° РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РґР°РЅС‹ РїРµСЂРµРјРµРЅРЅС‹РјРё.
+Р’ РєРѕРЅСЃРѕР»СЊ РІРѕ РІСЂРµРјСЏ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹ РґРѕР»Р¶РЅС‹ РїРѕСЃС‚СЂРѕС‡РЅРѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР° РІС‹РІРѕРґРёС‚СЊСЃСЏ:
+
+вЂў РЅРѕРјРµСЂ РїРѕС‚РѕРєР° РїРѕ РїРѕСЂСЏРґРєСѓ;
+вЂў РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїРѕС‚РѕРєР°;
+вЂў Р·Р°РїРѕР»РЅСЏСЋС‰РёР№СЃСЏ РёРЅРґРёРєР°С‚РѕСЂ РЅР°РїРѕРґРѕР±РёРµ РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂР°, РІРёР·СѓР°Р»РёР·РёСЂСѓСЋС‰РёР№ РїСЂРѕС†РµСЃСЃ В«СЂР°СЃС‡С‘С‚Р°В»;
+вЂў РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ СЃС‚СЂРѕРєРµ СЃСѓРјРјР°СЂРЅРѕРµ РІСЂРµРјСЏ, 
+Р·Р°С‚СЂР°С‡РµРЅРЅРѕРµ РЅР° СЂР°Р±РѕС‚Сѓ РїРѕС‚РѕРєР°.
+
+РЎС‚СЂРѕРєРё РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂРѕРІ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР° РґРѕР»Р¶РЅС‹ РІС‹РІРѕРґРёС‚СЊСЃСЏ РѕРґРЅРѕРІСЂРµРјРµРЅРѕ. 
+Р’СЂРµРјСЏ РїРѕСЏРІР»РµРЅРёСЏ РєР°Р¶РґРѕРіРѕ РЅРѕРІРѕРіРѕ СЃРёРјРІРѕР»Р° РІ СЃС‚СЂРѕРєРµ РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂР° РїРѕРґР±РµСЂРёС‚Рµ С‚Р°Рє, 
+С‡С‚РѕР±С‹ РїСЂРѕС†РµСЃСЃ Р·Р°РїРѕР»РЅРµРЅРёСЏ СЃС‚СЂРѕРєРё Р±С‹Р» РІРёРґРµРЅ. РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹ РїРѕ СЃСЃС‹Р»РєРµ.
+
+Р”РѕРїРѕР»РЅРµРЅРёРµ Рє Р·Р°РґР°РЅРёСЋ 2*
+Р’Рѕ РІСЂРµРјСЏ РѕС‡РµСЂРµРґРЅРѕР№ РёС‚РµСЂР°С†РёРё В«СЂР°СЃС‡С‘С‚Р°В» СЃС‹РјРёС‚РёСЂСѓР№С‚Рµ СЃРѕ СЃР»СѓС‡Р°Р№РЅРѕР№ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ 
+РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРµ РѕС€РёР±РєРё (exception), РєРѕС‚РѕСЂР°СЏ РЅРµ РґРѕР»Р¶РЅР° РїСЂРёРІРѕРґРёС‚СЊ Рє РїСЂРµРєСЂР°С‰РµРЅРёСЋ 
+СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєР° РёР»Рё РїСЂРѕРіСЂР°РјРјС‹. РџСЂРё СЌС‚РѕРј СЌС‚РѕС‚ С„Р°РєС‚ РґРѕР»Р¶РµРЅ РІРёР·СѓР°Р»РёР·РёСЂРѕРІР°С‚СЊСЃСЏ 
+РѕС‚РґРµР»СЊРЅС‹Рј С†РІРµС‚РѕРј РЅР° РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂРµ.
+*/
+
 #include <iostream>
 #include <string>
 #include <thread>
-#include <vector>
+
 #include <Windows.h>
 #include <chrono>
 #include <mutex>
@@ -10,116 +34,93 @@
 #include <exception>
 
 
-
-/*
-Задание 2
-Параллельные вычисления
-Напишите программу для расчёта суммы двух векторов.
-Распараллельте эту программу на 2, 4, 8 и 16 потоков.
-Определите, какое количество потоков даёт самый быстрый результат.
-Сравните результаты выполнения для массивов из 1 000, 10 000, 100 000 и 1 000 000 элементов.
-Время выполнения для каждого варианта сведите в таблицу и выведите её в консоль.
-Первый запущенный поток должен вывести на экран доступное количество аппаратных ядер.
-*/
-
 std::mutex mt;
 
 void SetCursor(int x, int y) {
 
-    COORD position = { x,y }; //позиция x и y
+    COORD position = { x,y }; //РїРѕР·РёС†РёСЏ x Рё y
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(hConsole, position);
 }
+
+void SetColor(int textColor, int bgColor)
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
+}
+
 
 struct AAA {
 
     AAA() {}
 
-    AAA(const std::vector<long long int>& vect_a, const std::vector<long long int>& vect_b, const int& blocks) :
-        _blocks(blocks), _vect_a(vect_a), _vect_b(vect_b)
+    AAA(const int& long_math, const int& blocks) :
+        _thr_blocks(blocks), _long_math(long_math)
     {
-        _summ_var.clear();
         _vec_lambda.clear();
         _threads.clear();
 
-        //создание вектора лямбд - отдельно чтобы иметь гибкость в системе
-        for (int i = 0; i < _blocks; ++i) {
-            _vec_lambda.push_back(([this, i]() {summ_block((i + 1)); }));
+        //СЃРѕР·РґР°РЅРёРµ РІРµРєС‚РѕСЂР° Р»СЏРјР±Рґ - РѕС‚РґРµР»СЊРЅРѕ С‡С‚РѕР±С‹ РёРјРµС‚СЊ РіРёР±РєРѕСЃС‚СЊ РІ СЃРёСЃС‚РµРјРµ
+        for (int i = 0; i < _thr_blocks; ++i) {
+            _vec_lambda.push_back(([this, i]() {  math_block(i); }));
         }
 
-        //создание вектора потоков с одновременной инициализацией в потоках функций из векктора лямбд
-        for (const auto& i : _vec_lambda) {
-            _threads.emplace_back(i);
+        //СЃРѕР·РґР°РЅРёРµ РІРµРєС‚РѕСЂР° РїРѕС‚РѕРєРѕРІ СЃ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕР№ РёРЅРёС†РёР°Р»РёР·Р°С†РёРµР№ РІ РїРѕС‚РѕРєР°С… С„СѓРЅРєС†РёР№ РёР· РІРµРєРєС‚РѕСЂР° Р»СЏРјР±Рґ
+        for (const auto& s : _vec_lambda) {            
+            _threads.emplace_back(s);            
         }
 
-        //остановка выполнения дальнейшего кода до завершения работы потоков
+        //РѕСЃС‚Р°РЅРѕРІРєР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґР°Р»СЊРЅРµР№С€РµРіРѕ РєРѕРґР° РґРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєРѕРІ
         for (auto& t : _threads) {
             t.join();
         }
-
-        //сложение общей итоговой суммы по вектору сумм блоков собранному из потоков
-        for (const auto& f : _summ_var) {
-            _summ_x = _summ_x + f;
-        }
-        //std::cout << "Итого потоков: " << _blocks << " сумма: " << _summ_x << std::endl;
     }
 
     ~AAA() {};
 
-    //рассчет суммы векторов по блокам с условие равности векторов по количеству позиций
-    void summ_block(const int& number_block) {
+    //РёРјРёС‚Р°С‚РѕСЂ СЂР°СЃС‡РµС‚Р°
+    void math_block(const int& number_th) {                
+  //РёРјРёРјС‚Р°С†РёСЏ СЂР°СЃС‡РµС‚Р° СЃ Р·Р°С…РІР°С‚РѕРј Рё РІС‹РІРѕРґРѕРј РѕР±С‰РµР№ РїРµСЂРµРјРµРЅРЅРѕР№
+        int consol_x{ 0 };
+        
+        //std::thread::id thisThreadId = std::this_thread::get_id();
+        mt.lock();
+        SetCursor(0, number_th);
+        SetColor(1, 0);
+        std::cout << "Id: " << std::this_thread::get_id() << " РџРѕС‚РѕРє: " << number_th << " ";
+        mt.unlock();
 
-        int x_1{ 0 }, x_2{ 0 };
-        long long int summ_var_x{ 0 }, summ_var_y{ 0 }, summ{ 0 };
+        auto start = std::chrono::steady_clock::now();
 
-        if (_vect_a.size() == _vect_b.size()) {
-            if (number_block <= _blocks) {
-                x_2 = _vect_a.size() / _blocks * number_block;
-                x_1 = x_2 - _vect_a.size() / _blocks;
-            }
-            if (_blocks == number_block) {
-                x_2 = _vect_a.size();
-            }
+        for (int i = 0; i < _long_math; ++i) {
+            mt.lock();
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            _count.store(i); 
+            consol_x = 20 + _count.load();
+            SetCursor(consol_x, number_th);
+            SetColor(5, 5);
+            std::cout << " ";
+            mt.unlock();
+        } 
 
-            for (int x = x_1; x < x_2; ++x) {
-                summ_var_x = summ_var_x + _vect_a.at(x);
-                summ_var_y = summ_var_y + _vect_b.at(x);
-            }
-            summ = summ_var_x + summ_var_x;
-        }
-        else { std::cout << "Ошибка - исходные вектора разной длины!"; }
-
-        //установка и снятие флага на блокировку доступа к ощему вектору промежуточных сумм класса с его наполнением
+        auto end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> elapsed_seconds = end - start;
 
         mt.lock();
-        _summ_var.push_back(summ);
+          SetCursor(consol_x , number_th);  
+          SetColor(1, 0);
+          std::cout << " Р’СЂРµРјСЏ, s - " << elapsed_seconds.count() ;
         mt.unlock();
+
     }
 
-    //гененратор вектора
-    std::vector<long long int> _vector_x(const int& size_x, const int& cof) {
+    int _thr_blocks{ 0 };    
+    int _long_math{ 0 };
+    std::atomic<int> _count;//РѕР±С‰Р°СЏ Р°С‚РѕРјР°СЂРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ
 
-        _vect_x.clear();
 
-        int x{ 0 };
-        for (int i = 0; i < size_x; ++i) {
-            x = i * cof;
-            _vect_x.push_back(x);
-        }
-        return _vect_x;
-    }
-
-    int _blocks{ 0 };
-    long long int _summ_x{ 0 };
-
-    std::vector<long long int> _vect_a;
-    std::vector<long long int> _vect_b;
-
-    std::vector<long long int> _vect_x;
-    std::vector<long long int> _summ_var;
-
-    std::vector<std::function<void(void)>> _vec_lambda; //вектор для лямбд 
-    std::vector<std::thread> _threads;//вектор для потоков
+    std::vector<std::function<void(void)>> _vec_lambda; //РІРµРєС‚РѕСЂ РґР»СЏ Р»СЏРјР±Рґ 
+    std::vector<std::thread> _threads;//РІРµРєС‚РѕСЂ РґР»СЏ РїРѕС‚РѕРєРѕРІ
 };
 
 
@@ -129,82 +130,18 @@ int main()
     SetConsoleOutputCP(1251);
     std::string text{ "y" };
     bool go_x{ false };
-
-    std::vector <int> block_x{ 1, 2, 4, 8, 16 };//блоки нарезки векторов
-    std::vector <int> size_x{ 1000, 10000, 100000, 1000000 };//размеры векторов
-    int  cof_1{ 1 }, cof_2{ 1 };//множители значений элементов векторов
-    std::vector<std::pair<long long int, std::pair<int, std::pair<int, double>>>> res_x; //вектор результатов (сумма,(размер вектора,(блоков, время)))
-
-    std::cout << "Пример потоков\n";
-    std::cout << std::endl;
-    std::cout << "Количество возможных потоков: " << std::thread::hardware_concurrency() << std::endl;
-    std::cout << std::endl;
+    int block{ 5 };
 
     do {
 
-        AAA a_1_1;
-        AAA a_1_2;
-
         try {
-            res_x.clear();
-            for (const auto& s : size_x) {
+            std::cout << "\033[2J";
 
-                //генерация вектора а
-                std::thread x_gen_1([&]() {
-                    a_1_1._vector_x(s, cof_1);
-                    });     //std::thread x_1(&AAA::vector_x, &a1, 100); //аналогично!
-                //генерация вектора в
-                std::thread x_gen_2([&]() {
-                    a_1_2._vector_x(s, cof_2);
-                    });
-                x_gen_2.join();
-                x_gen_1.join();
+            AAA a1(40, block);
+            a1.~AAA();
 
-                if ((x_gen_1.joinable() == false) && (x_gen_2.joinable() == false)) {
-
-                    for (const auto& i : block_x) {
-
-                        auto start = std::chrono::steady_clock::now();
-
-                        AAA a1(a_1_1._vect_x, a_1_2._vect_x, i);
-
-                        auto end = std::chrono::steady_clock::now();
-                        std::chrono::duration<double> elapsed_seconds = end - start;
-
-                        res_x.push_back({ a1._summ_x,{ s,{i, elapsed_seconds.count() } } });
-
-                        a1.~AAA();
-                    }
-                };
-            }
-
-            int count{ 0 };
-
-            std::cout << "Размер вектора:";
-            for (const auto& text_1 : size_x) {
-                SetCursor( (count*20+20),4);
-                std::cout << text_1;
-                ++count;
-            }
-            std::cout << std::endl;
-            for (int i = 0; i < 50; ++i) {
-                std::cout << "--";
-            }            
-            for (int f = 0; f < 5; f++) {
-                SetCursor(0,f+6);
-                std::cout << "Потоков:";
-                SetCursor(10, f + 6);
-                std::cout << res_x.at(f).second.second.first;
-            }
-            count = 0;
-            for (int f = 0; f < 4; f++) {
-                for (int i = 0; i < 5; ++i) {
-                    SetCursor(f * 20 + 20, i + 6);
-                    //std::cout << "S: " << res_x.at(count).first;
-                    std::cout << res_x.at(count).second.second.second << " (s)";
-                    ++count;
-                }
-            }            
+            SetColor(6, 0);
+            SetCursor(0, block+2);
 
             std::cout << std::endl;
             for (int i = 0; i < 50; ++i) {
@@ -218,20 +155,18 @@ int main()
         }
         catch (...)
         {
-            std::cerr << "Не известное исключение!" << std::endl;
+            std::cerr << "РќРµ РёР·РІРµСЃС‚РЅРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ!" << std::endl;
         }
 
-        std::cout << "Продолжить? Веедите y/n: ";
+        std::cout << "РџСЂРѕРґРѕР»Р¶РёС‚СЊ? Р’РµРµРґРёС‚Рµ y/n: ";
         std::cin >> text;
 
         if (text == "y") {
             go_x = true;
-
-            a_1_1.~AAA();
-            a_1_2.~AAA();
         }
         else {
             go_x = false;
+           
         }
 
     } while (go_x);
