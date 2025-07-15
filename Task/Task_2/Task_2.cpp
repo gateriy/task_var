@@ -26,7 +26,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
-
+#include <random>
 #include <Windows.h>
 #include <chrono>
 #include <mutex>
@@ -70,13 +70,15 @@ struct AAA {
             _threads.emplace_back(s);            
         }
 
-        //РѕСЃС‚Р°РЅРѕРІРєР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґР°Р»СЊРЅРµР№С€РµРіРѕ РєРѕРґР° РґРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєРѕРІ
+
+    }
+
+    ~AAA() {
+        //Р·Р°РїСѓСЃРє РїРѕС‚РѕРєРѕРІ Рё РѕСЃС‚Р°РЅРѕРІРєР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґР°Р»СЊРЅРµР№С€РµРіРѕ РєРѕРґР° РґРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєРѕРІ
         for (auto& t : _threads) {
             t.join();
         }
-    }
-
-    ~AAA() {};
+    };
 
     //РёРјРёС‚Р°С‚РѕСЂ СЂР°СЃС‡РµС‚Р°
     void math_block(const int& number_th) {                
@@ -88,13 +90,14 @@ struct AAA {
         SetCursor(0, number_th);
         SetColor(1, 0);
         std::cout << "Id: " << std::this_thread::get_id() << " РџРѕС‚РѕРє: " << number_th << " ";
-        mt.unlock();
+
 
         auto start = std::chrono::steady_clock::now();
 
+        mt.unlock();
         for (int i = 0; i < _long_math; ++i) {
             mt.lock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            std::this_thread::sleep_for(std::chrono::milliseconds((_rnd()%10)*10));
             _count.store(i); 
             consol_x = 20 + _count.load();
             SetCursor(consol_x, number_th);
@@ -117,7 +120,7 @@ struct AAA {
     int _thr_blocks{ 0 };    
     int _long_math{ 0 };
     std::atomic<int> _count;//РѕР±С‰Р°СЏ Р°С‚РѕРјР°СЂРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ
-
+    std::random_device _rnd;
 
     std::vector<std::function<void(void)>> _vec_lambda; //РІРµРєС‚РѕСЂ РґР»СЏ Р»СЏРјР±Рґ 
     std::vector<std::thread> _threads;//РІРµРєС‚РѕСЂ РґР»СЏ РїРѕС‚РѕРєРѕРІ
