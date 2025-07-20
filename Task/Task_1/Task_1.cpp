@@ -1,93 +1,71 @@
 п»ї// Task_1.cpp : Р­С‚РѕС‚ С„Р°Р№Р» СЃРѕРґРµСЂР¶РёС‚ С„СѓРЅРєС†РёСЋ "main". Р—РґРµСЃСЊ РЅР°С‡РёРЅР°РµС‚СЃСЏ Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹.
-
+//
 
 #include <iostream>
-#include <vector>
+#include<random>
+#include <future>
 #include <thread>
 #include <Windows.h>
-#include <string>
-#include <chrono>
-#include <atomic>
-//#include <mutex>
+//#include <algorithm>
 
-/*
-Р—Р°РґР°РЅРёРµ 1
-РћС‡РµСЂРµРґСЊ РєР»РёРµРЅС‚РѕРІ
-Р’Р°Рј РЅСѓР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РёРјРёС‚РёСЂСѓРµС‚ РѕС‡РµСЂРµРґСЊ РІ РѕРєРѕС€РєРѕ.
-Р”Р»СЏ СЌС‚РѕРіРѕ РЅСѓР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РґРІР° РїРѕС‚РѕРєР°, СЂР°Р±РѕС‚Р°СЋС‰РёРµ СЃ РѕРґРЅРѕР№ СЂР°Р·РґРµР»СЏРµРјРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№.
+ //С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° РјРёРЅРёРјСѓРјР° СЃ РІС‹РІРѕРґРѕРј СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ Р±СѓРґСѓС‰РµРј РІ promise
+void select_min(int arr[], int size, int min, std::promise<int> result_prom) {
 
-РџРµСЂРІС‹Р№ РїРѕС‚РѕРє РёРјРёС‚РёСЂСѓРµС‚ РєР»РёРµРЅС‚Р°: СЂР°Р· РІ СЃРµРєСѓРЅРґСѓ РѕРЅ РѕР±СЂР°С‰Р°РµС‚СЃСЏ Рє СЃС‡С‘С‚С‡РёРєСѓ
-РєР»РёРµРЅС‚РѕРІ Рё СѓРІРµР»РёС‡РёРІР°РµС‚ РµРіРѕ РЅР° 1. РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєР»РёРµРЅС‚РѕРІ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїР°СЂР°РјРµС‚СЂРёР·РёСЂРѕРІР°РЅРѕ.
+    for (int j = min + 1; j < size; j++) {
 
-Р’С‚РѕСЂРѕР№ РїРѕС‚РѕРє РёРјРёС‚РёСЂСѓРµС‚ РѕРїРµСЂР°С†РёРѕРЅРёСЃС‚Р°: СЂР°Р· РІ 2 СЃРµРєСѓРЅРґС‹ РѕРЅ РѕР±СЂР°С‰Р°РµС‚СЃСЏ
-Рє СЃС‡С‘С‚С‡РёРєСѓ РєР»РёРµРЅС‚РѕРІ Рё СѓРјРµРЅСЊС€Р°РµС‚ РµРіРѕ РЅР° 1. В«РћРїРµСЂР°С†РёРѕРЅРёСЃС‚В» СЂР°Р±РѕС‚Р°РµС‚ РґРѕ РїРѕСЃР»РµРґРЅРµРіРѕ РєР»РёРµРЅС‚Р°.
+        if (arr[j] < arr[min])
+            min = j;
+    }
+    result_prom.set_value(min);
+}
 
-Р—Р°РґР°РЅРёРµ 1 - 1
-РђС‚РѕРјР°СЂРЅР°СЏ РѕС‡РµСЂРµРґСЊ РєР»РёРµРЅС‚РѕРІ
-РќСѓР¶РЅРѕ РјРѕРґРёС„РёС†РёСЂРѕРІР°С‚СЊ Р·Р°РґР°РЅРёРµ 1 Рє РїРµСЂРІРѕРјСѓ СѓСЂРѕРєСѓ С‚Р°Рє, С‡С‚РѕР±С‹ СЃС‡С‘С‚С‡РёРє РєР»РёРµРЅС‚РѕРІ Р±С‹Р» Р°С‚РѕРјР°СЂРЅС‹Рј.
-Р’СЃРµ РѕРїРµСЂР°С†РёРё СЃРѕ СЃС‡С‘С‚С‡РёРєРѕРІ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р°С‚РѕРјР°СЂРЅС‹РјРё.
-РџСЂРѕРІРµСЂСЊС‚Рµ СЂР°Р±РѕС‚Сѓ СЂР°Р·Р»РёС‡РЅС‹РјРё СЃРїРѕСЃРѕР±Р°РјРё СѓРїРѕСЂСЏРґРѕС‡РµРЅРёСЏ РґРѕСЃС‚СѓРїР° Рє РїР°РјСЏС‚Рё.
-*/
-//std::mutex mt;
+//С„СѓРЅРєС†РёСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё СЃ Р·Р°РїСѓСЃРєРѕРј РїРѕС‚РѕРєР° Рё РІС‹РІРѕРґРѕРј РёР· РЅРµРіРѕ СЂРµР·СѓР»СЊС‚Р° РїРѕ С„СѓРЅРєС†РёРё РїРѕРёСЃРєР° РјРёРЅРёРјСѓРјР°
+void select_sort(int arr[], int size) {
 
-class in_out {
-public:
+    int min_x{ 0 };
+    for (int i = 0; i < (size - 1); i++) {
 
-	void SetColor(int textColor, int bgColor)
-	{
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
-	}
+        //СЃРѕР·РґР°РЅРёРµ СЃРІСЏР·РєРё promise Рё future
+        std::promise<int> prom_1;
+        std::future<int> future_select_min = prom_1.get_future();
+        //С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° РјРёРЅРёРјСѓРјР° Р·Р°РїСѓСЃРєР°РµРјР°СЏ РІ РѕС‚РґРµР»СЊРЅРѕРј РїРѕС‚РѕРєРµ (СЂРµР°Р»РёР·Р°С†РёСЏ Р·Р°РїСѓСЃРєР° С‡РµСЂРµР· Р»СЏРјР±РґСѓ)
+        std::thread thr_select_min([&]() {select_min(arr, size, i, std::move(prom_1)); });
+        //РІС‹РІРѕРґ Р·РЅР°С‡РµРЅРёРµ РёР· РїРѕС‚РѕРєР° Рё РїСЂРёСЃРІРѕРµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ РІ С‚РµРєСѓС‰РµРј РїРѕС‚РѕРєРµ РјРµС‚РѕРґРѕРј get()
+        min_x = future_select_min.get();
+        //РѕСЃС‚Р°РЅРѕРІРєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РїРѕС‚РѕРєР°
+        thr_select_min.join();
 
-	void SetCursor(int x, int y) {
+        std::swap(arr[min_x], arr[i]);
+    }
+}
 
-		COORD position = { x,y }; //РїРѕР·РёС†РёСЏ x Рё y
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleCursorPosition(hConsole, position);
-	}
+void print_arr(const int arr[], const int& size) {
 
-	void in_data(const int& var_x) {
+    for (int i = 0; i < size; ++i) {
+        std::cout << "[" << arr[i] << "]\t";
 
-		while (count.load() <= var_x) {
-			std::this_thread::sleep_for(std::chrono::seconds(1));
-			count.store(++count);
-			SetColor(5, 0);
-			SetCursor(0, 3);
-			std::cout <<  "РћС‡РµСЂРµРґСЊ РєР»РёРЅС‚РѕРІ: " << count.load();
-		}
-	};
+    }
+    std::cout << std::endl;
+}
 
-	void out_data() {
-			SetColor(5, 0);
-			SetCursor(0, 4);
-			std::cout << "РћС‡РµСЂРµРґСЊ РѕРїРµСЂР°С†РёРѕРЅРёСЃС‚Р°: ";
-		while (count.load() >= 0) {
-			std::this_thread::sleep_for(std::chrono::seconds(2));
-			SetCursor(23, 4);
-			std::cout << count.load()<<"  ";
-			count.store(--count);
-		}
-	};
-
-private:
-	std::atomic<int> count;
-};
 
 int main()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-	in_out in_out_1;
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
-	std::cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РІРѕР·РјРѕР¶РЅС‹С… РїРѕС‚РѕРєРѕРІ: " << std::thread::hardware_concurrency() << std::endl;
-	std::cout << std::endl;
+    const int size_x{ 300 };
+    int arr[size_x];
 
-	std::thread t1([&in_out_1]() {in_out_1.in_data(10); });
-	std::thread t2([&in_out_1]() {in_out_1.out_data(); });
+    for (int i = 0; i < size_x; ++i) {
+        arr[i] = std::rand()%100;
+    }
+    std::cout << "РњР°СЃСЃРёРІ РґРѕ СЃРѕСЂС‚РёСЂРѕРІРєРё: " << std::endl;
+    print_arr(arr, size_x);
 
-	t1.join();
-	t2.join();
+    select_sort(arr, size_x);
+    std::cout << "РњР°СЃСЃРёРІ РїРѕСЃР»Рµ СЃРѕСЂС‚РёСЂРѕРІРєРё: " << std::endl;
+    print_arr(arr, size_x);
 
-	std::cout << std::endl;
-	in_out_1.SetColor(1, 0);
 }
+

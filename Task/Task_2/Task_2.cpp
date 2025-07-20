@@ -1,176 +1,129 @@
-п»ї
+
+#include<iostream>
+#include<vector>
+#include<random>
+#include<functional>
+#include<Windows.h>
+#include<string>
+#include<thread>
+#include<mutex>
+#include<future>
+//#include <algorithm>
+
+
+template<typename Iterator, typename Function_x>
+
+void for_each_x(Iterator first, Iterator last, Function_x f) {
+    //определение размера контейнера
+    unsigned long const size_x = std::distance(first, last);
+
+    //завершение рекурсии когда кончилась дистанция
+    if (!size_x) { return; }
+
+    //количество блоков по физически возможным потокам
+    unsigned const min_thread = std::thread::hardware_concurrency(); 
+
+    //если размер контейнера равен или меньше количества потоков то запускаем в основном потоке
+    if (size_x < min_thread) {
+
+        std::for_each(first, last, f); 
+
+    }
+    else {
+        //деление диапазона на поплам
+        Iterator const mid_point = first + size_x / 2;
+        //запуск от начала до середины диапазона через future
+        std::future<void> first_half = std::async(&for_each_x<Iterator, Function_x>, first, mid_point, f);
+        //прямой запуск в основном потоке от середины до конца диапазона
+        for_each_x(mid_point, last, f);
+        //вывод результата future
+        first_half.get();
+    }
+}
+
 /*
-Р—Р°РґР°РЅРёРµ 2
-РџСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂ
-РЎРѕР·РґР°Р№С‚Рµ РєРѕРЅСЃРѕР»СЊРЅРѕРµ РїСЂРёР»РѕР¶РµРЅРёРµ РґР»СЏ РёРјРёС‚Р°С†РёРё РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕРіРѕ СЂР°СЃС‡С‘С‚Р°.
-РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕС‚РѕРєРѕРІ, РґР»РёРЅР° СЂР°СЃС‡С‘С‚Р° РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РґР°РЅС‹ РїРµСЂРµРјРµРЅРЅС‹РјРё.
-Р’ РєРѕРЅСЃРѕР»СЊ РІРѕ РІСЂРµРјСЏ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹ РґРѕР»Р¶РЅС‹ РїРѕСЃС‚СЂРѕС‡РЅРѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР° РІС‹РІРѕРґРёС‚СЊСЃСЏ:
 
-вЂў РЅРѕРјРµСЂ РїРѕС‚РѕРєР° РїРѕ РїРѕСЂСЏРґРєСѓ;
-вЂў РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїРѕС‚РѕРєР°;
-вЂў Р·Р°РїРѕР»РЅСЏСЋС‰РёР№СЃСЏ РёРЅРґРёРєР°С‚РѕСЂ РЅР°РїРѕРґРѕР±РёРµ РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂР°, РІРёР·СѓР°Р»РёР·РёСЂСѓСЋС‰РёР№ РїСЂРѕС†РµСЃСЃ В«СЂР°СЃС‡С‘С‚Р°В»;
-вЂў РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ СЃС‚СЂРѕРєРµ СЃСѓРјРјР°СЂРЅРѕРµ РІСЂРµРјСЏ, 
-Р·Р°С‚СЂР°С‡РµРЅРЅРѕРµ РЅР° СЂР°Р±РѕС‚Сѓ РїРѕС‚РѕРєР°.
+void for_each_x(std::vector<int>::iterator begin, std::vector<int>::iterator end, const std::function<void(int)>& function_x) {
+    //ограничение на запуск для одного потока от количества элементов в контейнере
+    if (std::distance(begin, end) <= 1) {
+        function_x(*begin);
+        return;
+    }
 
-РЎС‚СЂРѕРєРё РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂРѕРІ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР° РґРѕР»Р¶РЅС‹ РІС‹РІРѕРґРёС‚СЊСЃСЏ РѕРґРЅРѕРІСЂРµРјРµРЅРѕ. 
-Р’СЂРµРјСЏ РїРѕСЏРІР»РµРЅРёСЏ РєР°Р¶РґРѕРіРѕ РЅРѕРІРѕРіРѕ СЃРёРјРІРѕР»Р° РІ СЃС‚СЂРѕРєРµ РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂР° РїРѕРґР±РµСЂРёС‚Рµ С‚Р°Рє, 
-С‡С‚РѕР±С‹ РїСЂРѕС†РµСЃСЃ Р·Р°РїРѕР»РЅРµРЅРёСЏ СЃС‚СЂРѕРєРё Р±С‹Р» РІРёРґРµРЅ. РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹ РїРѕ СЃСЃС‹Р»РєРµ.
+    int thr_count = std::thread::hardware_concurrency(); //количество блоков по физически возможным потокам
+    int block_size = (std::distance(begin, end) / thr_count) + 1; //размер блока
 
-Р”РѕРїРѕР»РЅРµРЅРёРµ Рє Р·Р°РґР°РЅРёСЋ 2*
-Р’Рѕ РІСЂРµРјСЏ РѕС‡РµСЂРµРґРЅРѕР№ РёС‚РµСЂР°С†РёРё В«СЂР°СЃС‡С‘С‚Р°В» СЃС‹РјРёС‚РёСЂСѓР№С‚Рµ СЃРѕ СЃР»СѓС‡Р°Р№РЅРѕР№ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ 
-РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРµ РѕС€РёР±РєРё (exception), РєРѕС‚РѕСЂР°СЏ РЅРµ РґРѕР»Р¶РЅР° РїСЂРёРІРѕРґРёС‚СЊ Рє РїСЂРµРєСЂР°С‰РµРЅРёСЋ 
-СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєР° РёР»Рё РїСЂРѕРіСЂР°РјРјС‹. РџСЂРё СЌС‚РѕРј СЌС‚РѕС‚ С„Р°РєС‚ РґРѕР»Р¶РµРЅ РІРёР·СѓР°Р»РёР·РёСЂРѕРІР°С‚СЊСЃСЏ 
-РѕС‚РґРµР»СЊРЅС‹Рј С†РІРµС‚РѕРј РЅР° РїСЂРѕРіСЂРµСЃСЃ-Р±Р°СЂРµ.
+    std::vector<std::thread> threads;//ветор потоков
+    std::vector<decltype(begin)> block_start(thr_count - 1);//вектор итераторов начал для блоков
+
+    for (int i = 1; i < thr_count; ++i) {
+        block_start[i - 1] = begin;
+        std::advance(block_start[i - 1], block_size);
+    }
+
+    for (int i = 0; i < (thr_count - 1); ++i) {
+        //begin = block_start[i];
+        //end = std::next(begin, block_size);
+        threads.emplace_back([begin = block_start[i], end = std::next(begin, block_size), function_x]() {for_each_x(begin, end, function_x); });
+    }
+
+    function_x(*std::next(begin, block_size - 1));
+    //function_x(end);
+    //for (auto& it = begin; it != end; ++it) {
+
+        //std::cout << *it<<" ";
+      //  function_x(*it,"www");
+    //}
+
+    for (auto& th : threads) {
+        th.join();
+    }
+
+}
 */
 
-#include <iostream>
-#include <string>
-#include <thread>
-#include <random>
-#include <Windows.h>
-#include <chrono>
-#include <mutex>
-#include <functional>
-#include <exception>
-
-
 std::mutex mt;
-
-void SetCursor(int x, int y) {
-
-    COORD position = { x,y }; //РїРѕР·РёС†РёСЏ x Рё y
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(hConsole, position);
+void print_arr_1(int i) {
+    mt.lock();
+    std::cout << "[" << i*2 << "]\t";
+    mt.unlock();
 }
 
-void SetColor(int textColor, int bgColor)
-{
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, (bgColor << 4) | textColor);
+void print_arr(const std::vector<int>& vec_x) {
+    for (auto& i : vec_x) {
+        std::cout << "[" << i << "]\t";
+    }
+    std::cout << std::endl;
 }
-
-
-struct AAA {
-
-    AAA() {}
-
-    AAA(const int& long_math, const int& blocks) :
-        _thr_blocks(blocks), _long_math(long_math)
-    {
-        _vec_lambda.clear();
-        _threads.clear();
-
-        //СЃРѕР·РґР°РЅРёРµ РІРµРєС‚РѕСЂР° Р»СЏРјР±Рґ - РѕС‚РґРµР»СЊРЅРѕ С‡С‚РѕР±С‹ РёРјРµС‚СЊ РіРёР±РєРѕСЃС‚СЊ РІ СЃРёСЃС‚РµРјРµ
-        for (int i = 0; i < _thr_blocks; ++i) {
-            _vec_lambda.push_back(([this, i]() {  math_block(i); }));
-        }
-
-        //СЃРѕР·РґР°РЅРёРµ РІРµРєС‚РѕСЂР° РїРѕС‚РѕРєРѕРІ СЃ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕР№ РёРЅРёС†РёР°Р»РёР·Р°С†РёРµР№ РІ РїРѕС‚РѕРєР°С… С„СѓРЅРєС†РёР№ РёР· РІРµРєРєС‚РѕСЂР° Р»СЏРјР±Рґ
-        for (const auto& s : _vec_lambda) {            
-            _threads.emplace_back(s);            
-        }
-
-
-    }
-
-    ~AAA() {
-        //Р·Р°РїСѓСЃРє РїРѕС‚РѕРєРѕРІ Рё РѕСЃС‚Р°РЅРѕРІРєР° РІС‹РїРѕР»РЅРµРЅРёСЏ РґР°Р»СЊРЅРµР№С€РµРіРѕ РєРѕРґР° РґРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєРѕРІ
-        for (auto& t : _threads) {
-            t.join();
-        }
-    };
-
-    //РёРјРёС‚Р°С‚РѕСЂ СЂР°СЃС‡РµС‚Р°
-    void math_block(const int& number_th) {                
-  //РёРјРёРјС‚Р°С†РёСЏ СЂР°СЃС‡РµС‚Р° СЃ Р·Р°С…РІР°С‚РѕРј Рё РІС‹РІРѕРґРѕРј РѕР±С‰РµР№ РїРµСЂРµРјРµРЅРЅРѕР№
-        int consol_x{ 0 };
-        
-        //std::thread::id thisThreadId = std::this_thread::get_id();
-        mt.lock();
-        SetCursor(0, number_th);
-        SetColor(1, 0);
-        std::cout << "Id: " << std::this_thread::get_id() << " РџРѕС‚РѕРє: " << number_th << " ";
-
-
-        auto start = std::chrono::steady_clock::now();
-
-        mt.unlock();
-        for (int i = 0; i < _long_math; ++i) {
-            mt.lock();
-            std::this_thread::sleep_for(std::chrono::milliseconds((_rnd()%10)*10));
-            _count.store(i); 
-            consol_x = 20 + _count.load();
-            SetCursor(consol_x, number_th);
-            SetColor(5, 5);
-            std::cout << " ";
-            mt.unlock();
-        } 
-
-        auto end = std::chrono::steady_clock::now();
-        std::chrono::duration<double> elapsed_seconds = end - start;
-
-        mt.lock();
-          SetCursor(consol_x , number_th);  
-          SetColor(1, 0);
-          std::cout << " Р’СЂРµРјСЏ, s - " << elapsed_seconds.count() ;
-        mt.unlock();
-
-    }
-
-    int _thr_blocks{ 0 };    
-    int _long_math{ 0 };
-    std::atomic<int> _count;//РѕР±С‰Р°СЏ Р°С‚РѕРјР°СЂРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ
-    std::random_device _rnd;
-
-    std::vector<std::function<void(void)>> _vec_lambda; //РІРµРєС‚РѕСЂ РґР»СЏ Р»СЏРјР±Рґ 
-    std::vector<std::thread> _threads;//РІРµРєС‚РѕСЂ РґР»СЏ РїРѕС‚РѕРєРѕРІ
-};
-
 
 int main()
 {
+
+    std::vector<int> a;
+
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    std::string text{ "y" };
-    bool go_x{ false };
-    int block{ 5 };
 
-    do {
+    const int size_x{ 100 };
 
-        try {
-            std::cout << "\033[2J";
+    for (int i = 0; i < size_x; ++i) {
+        a.push_back(std::rand() % 100);
+    }
+    std::cout << "Исходный массив: " << std::endl;
+    print_arr(a);
 
-            AAA a1(40, block);
-            a1.~AAA();
+    /*
+    auto b = [&](int i) {
+        mt.lock();
+        std::cout << "[" << i * 2 << "]" << "\t";
+        mt.unlock(); };
+    */
+    std::cout << std::endl;
+    std::cout << "Обработатнный массив (умножение на 2 и вывод в процессе обработки): " << std::endl;
+    for_each_x(a.begin(), a.end(), print_arr_1);
+    //for_each_x(a.begin(), a.end(), b);
 
-            SetColor(6, 0);
-            SetCursor(0, block+2);
+    std::cout << std::endl;
 
-            std::cout << std::endl;
-            for (int i = 0; i < 50; ++i) {
-                std::cout << "--";
-            }
-            std::cout << std::endl;
-        }
-        catch (std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-        catch (...)
-        {
-            std::cerr << "РќРµ РёР·РІРµСЃС‚РЅРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ!" << std::endl;
-        }
-
-        std::cout << "РџСЂРѕРґРѕР»Р¶РёС‚СЊ? Р’РµРµРґРёС‚Рµ y/n: ";
-        std::cin >> text;
-
-        if (text == "y") {
-            go_x = true;
-        }
-        else {
-            go_x = false;
-           
-        }
-
-    } while (go_x);
+   
 }
