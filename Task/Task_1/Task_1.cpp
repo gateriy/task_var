@@ -1,71 +1,74 @@
-п»ї// Task_1.cpp : Р­С‚РѕС‚ С„Р°Р№Р» СЃРѕРґРµСЂР¶РёС‚ С„СѓРЅРєС†РёСЋ "main". Р—РґРµСЃСЊ РЅР°С‡РёРЅР°РµС‚СЃСЏ Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹.
-//
+п»ї//Task 2 array
 
 #include <iostream>
-#include<random>
-#include <future>
-#include <thread>
-#include <Windows.h>
-//#include <algorithm>
+#include <tuple>
 
- //С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° РјРёРЅРёРјСѓРјР° СЃ РІС‹РІРѕРґРѕРј СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ Р±СѓРґСѓС‰РµРј РІ promise
-void select_min(int arr[], int size, int min, std::promise<int> result_prom) {
 
-    for (int j = min + 1; j < size; j++) {
 
-        if (arr[j] < arr[min])
-            min = j;
-    }
-    result_prom.set_value(min);
+//РќР°РїРёС€РёС‚Рµ РїСЂРѕРіСЂР°РјРјСѓ, РєРѕС‚РѕСЂР°СЏ СЃРѕР·РґР°С‘С‚ РјР°СЃСЃРёРІ С†РµР»С‹С… С‡РёСЃРµР» РЅР° 10 СЌР»РµРјРµРЅС‚РѕРІ, 
+//РІС‹РІРѕРґРёС‚ РЅР° СЌРєСЂР°РЅ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°, РЅР°С…РѕРґРёС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ Рё РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР° Рё РІС‹РІРѕРґРёС‚ РёС… РЅР° СЌРєСЂР°РЅ.
+
+//input array random 
+std::pair <int, int*> InArrRand() {
+
+	const int size{ 10 }; //const array
+	static int Arr_1[size]; //СЃС‚Р°С‚РёС‡РµСЃРєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ С…СЂР°РЅРµРЅРёСЏ РјР°СЃСЃРёРІР°
+
+	for (int i = 0; i < size; ++i) {
+		Arr_1[i] = rand() % 100;
+	}
+	return { size,Arr_1 };
 }
 
-//С„СѓРЅРєС†РёСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё СЃ Р·Р°РїСѓСЃРєРѕРј РїРѕС‚РѕРєР° Рё РІС‹РІРѕРґРѕРј РёР· РЅРµРіРѕ СЂРµР·СѓР»СЊС‚Р° РїРѕ С„СѓРЅРєС†РёРё РїРѕРёСЃРєР° РјРёРЅРёРјСѓРјР°
-void select_sort(int arr[], int size) {
+//СЂР°Р·РјРµСЂ, СЂР°РЅРґРѕРјРЅС‹Р№ СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅС‹Р№ РјР°СЃСЃРёРІ (СѓРєР°Р·Р°С‚РµР»СЊ),MAX, MIN -  С„СѓРЅРєС†РёСЏ С‡РµСЂРµ РєРѕСЂС‚РµР¶
+std::tuple <int, int*, int, int> MaxMinArr() {
 
-    int min_x{ 0 };
-    for (int i = 0; i < (size - 1); i++) {
+	std::pair <int, int*> arr_x = InArrRand(); //С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°СЃСЃРёРІР° РЅР° РѕСЃРЅРѕРІРµ СЂР°РЅРґРѕРјРЅРѕР№ С„СѓРЅРєС†РёРё
 
-        //СЃРѕР·РґР°РЅРёРµ СЃРІСЏР·РєРё promise Рё future
-        std::promise<int> prom_1;
-        std::future<int> future_select_min = prom_1.get_future();
-        //С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° РјРёРЅРёРјСѓРјР° Р·Р°РїСѓСЃРєР°РµРјР°СЏ РІ РѕС‚РґРµР»СЊРЅРѕРј РїРѕС‚РѕРєРµ (СЂРµР°Р»РёР·Р°С†РёСЏ Р·Р°РїСѓСЃРєР° С‡РµСЂРµР· Р»СЏРјР±РґСѓ)
-        std::thread thr_select_min([&]() {select_min(arr, size, i, std::move(prom_1)); });
-        //РІС‹РІРѕРґ Р·РЅР°С‡РµРЅРёРµ РёР· РїРѕС‚РѕРєР° Рё РїСЂРёСЃРІРѕРµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ РІ С‚РµРєСѓС‰РµРј РїРѕС‚РѕРєРµ РјРµС‚РѕРґРѕРј get()
-        min_x = future_select_min.get();
-        //РѕСЃС‚Р°РЅРѕРІРєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РїРѕС‚РѕРєР°
-        thr_select_min.join();
+	int* arr = arr_x.second;
+	int size_y = arr_x.first;
+	int res_max = arr_x.second[0];
+	int res_min = arr_x.second[0];
 
-        std::swap(arr[min_x], arr[i]);
-    }
+	for (int i = 0; i < size_y; ++i) {
+		for (int n = 0; n < size_y; ++n) {
+				
+				if (arr[i] >= arr[n] && res_max < arr[i]) {
+					res_max = arr[i];
+				}			
+				if (arr[i] <= arr[n] && res_min > arr[i]) {
+					res_min = arr[n];
+				}
+		}
+	}
+	return  std::make_tuple(size_y, arr, res_max, res_min );
 }
 
-void print_arr(const int arr[], const int& size) {
-
-    for (int i = 0; i < size; ++i) {
-        std::cout << "[" << arr[i] << "]\t";
-
-    }
-    std::cout << std::endl;
-}
+int main() {
 
 
-int main()
-{
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
 
-    const int size_x{ 300 };
-    int arr[size_x];
+		int* arr_1;
+		int size{ 0 }, max{ 0 }, min{ 0 };
 
-    for (int i = 0; i < size_x; ++i) {
-        arr[i] = std::rand()%100;
-    }
-    std::cout << "РњР°СЃСЃРёРІ РґРѕ СЃРѕСЂС‚РёСЂРѕРІРєРё: " << std::endl;
-    print_arr(arr, size_x);
+		std::tie (size,arr_1,max,min) = MaxMinArr();
 
-    select_sort(arr, size_x);
-    std::cout << "РњР°СЃСЃРёРІ РїРѕСЃР»Рµ СЃРѕСЂС‚РёСЂРѕРІРєРё: " << std::endl;
-    print_arr(arr, size_x);
+		std::cout << "Task 2 (arr)";
+		std::cout << "\n" << std::endl;		
+
+		bool fist_cycle = false;
+		for (int i = 0; i < size; ++i) {
+			if (fist_cycle) {
+				std::cout << ", ";
+			}
+			fist_cycle = true;
+			std::cout << arr_1[i];
+		}	
+
+		std::cout << "\n" << std::endl;
+		std::cout << "Max array: " << max << std::endl;
+		std::cout << "Min array: " << min;
+		std::cout << "\n" << std::endl;
 
 }
 
