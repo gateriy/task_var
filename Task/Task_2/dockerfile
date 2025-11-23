@@ -1,9 +1,0 @@
-FROM ubuntu:latest
-copy . usr/src/Task_2
-WORKDIR /usr/src/Task_2
-RUN apt update 
-run apt install -y clang 
-run apt install -y g++
-run clang++ Task_4_array.cpp -o Task_4_array
-run g++ -o Task_4_array_g Task_4_array.cpp
-
